@@ -1,80 +1,84 @@
-# 🧪 CDI Domain Template
+# 🧬 CDI: RNA-Seq Data Analysis
 
-Reusable template for all **Complex Data Insights (CDI)** domain repositories, designed for layered Bookdown projects in R and Python.
+[![Live Site](https://img.shields.io/badge/visit-site-blue?logo=githubpages)](https://datainsights.github.io/cdi-rnaseq)
 
-📘 **Use this template** on GitHub to create new domain-specific guides with consistent structure and automation.
+📘 **Live guide:** [https://datainsights.github.io/cdi-rnaseq](https://datainsights.github.io/cdi-rnaseq)
 
----
-
-## 📦 Features
-
-- ✅ Modular Bookdown structure for:
-  - Exploratory Data Analysis (EDA)
-  - Visualization (VIZ)
-  - Statistical Analysis (STATS)
-  - Machine Learning (ML)
-- ✅ Ready-to-run R and Python environment setup
-- ✅ Preconfigured GitBook and PDF output
-- ✅ Clean `.gitignore`, metadata, and styling files
-- ✅ Ideal for reproducible data science workflows
+Modular, reproducible framework for analyzing RNA-Seq datasets using  
+**Bookdown**, **renv**, and **GitHub Actions** — deployed via GitHub Pages.
 
 ---
 
-## 🚀 How to Use This Template
+![Test Book Build](https://github.com/datainsights/cdi-rnaseq/actions/workflows/test-book.yml/badge.svg)
+![Deploy Book](https://github.com/datainsights/cdi-rnaseq/actions/workflows/deploy-book.yml/badge.svg)
 
-1. Click **"Use this template"** on GitHub.
-2. Clone your new repository locally:
-   ```bash
-   git clone https://github.com/your-org/your-new-domain.git
-   cd your-new-domain
-   ```
-3. Make the setup scripts executable:
-   ```bash
-   chmod +x scripts/setup_r_env.sh
-   chmod +x scripts/setup_py_env.sh
-   ```
-4. Run the environment setup:
-   ```bash
-   ./scripts/setup_r_env.sh
-   ./scripts/setup_py_env.sh
-   ```
-5. Build the book:
-   ```bash
-   ./scripts/build-all.sh
-   ```
+> Manual test + auto-deploy CI split for clean and controlled builds.
 
 ---
 
-## 🗂️ Folder Overview
+## 📘 Overview
 
-```text
-data/       → Placeholder dataset (e.g., iris.csv)
-images/     → Cover image (use standardized cover.png)
-library/    → CSL and BibTeX files
-scripts/    → Setup and build automation (R + Python)
-*.Rmd       → Modular Q&A content by layer
-index-*.Rmd → Bookdown entry files per layer
-_output.yml → Bookdown output config
+This domain guides users through RNA-Seq data preprocessing, normalization, and downstream analysis using structured analytical layers.
+
+Layered structure:
+
+- 🔍 **Exploratory Data Analysis (EDA)** layer
+- 📊 **Visualization (VIZ)** layer *(coming soon)*
+- 📐 **Statistical Analysis (STATS)** layer *(coming soon)*
+- 🧠 **Machine Learning (ML)** layer *(coming soon)*
+
+---
+
+## 🛠️ Environment Setup
+
+This project supports both **R** and **Python** workflows.
+
+### 🔄 Option 1: Restore R dependencies directly
+
+```bash
+Rscript -e 'renv::restore()'
 ```
 
+### ⚙️ Option 2: Run the full environment setup (recommended)
+
+```bash
+# Make setup scripts executable
+chmod +x scripts/setup_r_env.sh
+chmod +x scripts/setup_py_env.sh
+
+# Run R and Python environment setup
+./scripts/setup_r_env.sh
+./scripts/setup_py_env.sh
+```
+
+### 📦 Notes
+
+- **R packages** are managed with `renv` and modular installer scripts in `scripts/`.
+- **Python packages** are listed in `requirements.txt` and installed using a virtual environment (`venv/`) created with Python’s built-in `venv` module.
+- Customize:
+  - `scripts/common.R` and `scripts/rnaseq.R` (for R)
+  - `requirements.txt` (for Python)
+
 ---
 
-## 🔧 Notes
+## 📁 Data Sources
 
-- **R packages** managed using `renv` and modular install scripts.
-- **Python packages** listed in `requirements.txt`, installed using `venv/`.
-- **Cover image** must be named `images/cover.png`.
-- Customize `.Rmd` files and rename `scripts/domain.R` to reflect your specific domain.
+Typical datasets include:
+- Gene count matrices
+- Sample metadata
+- Annotation files (e.g., GTF, FASTA)
+
+Place all input files inside the `data/` folder.
 
 ---
 
 ## 📄 License
 
-This template is licensed under the [MIT License](LICENSE).  
-Attribution appreciated when used for educational or published work.
+This guide is released under the [MIT License](LICENSE).  
+Attribution appreciated when used in educational or published works.
 
 ---
 
-## 🔍 Maintainers
+## 🧠 Maintainers
 
-Created and maintained by the **CDI Team** at [ComplexDataInsights.com](https://complexdatainsights.com).
+Created and maintained by the **CDI Team** at [ComplexDataInsights.com](https://complexdatainsights.com)
