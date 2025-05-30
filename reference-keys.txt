@@ -1,0 +1,4 @@
+welcome-to-cdi-from-reads-to-insights-in-rna-seq
+this-guide-helps-you-explore-rna-seq-datasets-from-count-matrices-to-quality-control.-youll-gain-confidence-in-examining-expression-patterns-and-preparing-gene-level-summaries-for-downstream-use.
+the-cdi-learning-path
+section-1
