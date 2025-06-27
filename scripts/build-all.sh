@@ -4,7 +4,8 @@ set -e
 
 # Define the list of Jupyter Notebook filenames (without extension)
 NOTEBOOK_NAMES=(
-    "03-1-rnaseq"
+    "03-1-rnaseq-eda"
+    "03-1-rnaseq-viz"
 )
 
 # Define the output directory (use current folder)

@@ -1,0 +1,96 @@
+# (PART) DIFFERENTIAL GENE EXPRESSION {-}
+
+# How do you perform differential gene expression analysis using DESeq2?
+
+## Explanation
+
+Once the count matrix and sample metadata are properly loaded and matched, we use **DESeq2** to identify genes that are significantly differentially expressed between experimental conditions.
+
+DESeq2 performs a robust, multi-step process:
+
+1. 📊 **Estimates size factors** to normalize for library depth  
+2. 🔁 **Calculates dispersion** for each gene to model biological variability  
+3. ⚙️ **Fits a negative binomial generalized linear model (GLM)** to the counts  
+4. 🧪 **Tests for significance** using the Wald test (or LRT, if specified)  
+5. 📉 **Adjusts p-values** using False Discovery Rate (FDR) correction  
+
+The result is a table of genes with corresponding **log2 fold changes**, **p-values**, and **adjusted p-values**—ready for interpretation and visualization.
+
+---
+
+## Python Code
+
+```python
+# NOTE: DESeq2 is R-based; in Python, use rpy2 or export results from R.
+# Placeholder: Python is used only for downstream visualizations once DE results are saved.
+```
+
+---
+
+## R Code
+
+The following code is included in the script `scripts/res-df.R`:
+
+```r
+library(tidyverse)
+library(DESeq2)
+
+# 🔄 Set seed for reproducibility
+set.seed(42)
+
+# 🔹 Load data
+counts <- read_csv("data/demo_counts.csv") %>%
+  column_to_rownames("gene")
+metadata <- read_csv("data/demo_metadata.csv")
+
+# 🧬 Create DESeq2 object
+dds <- DESeqDataSetFromMatrix(countData = counts,
+                              colData = metadata,
+                              design = ~ condition)
+
+# ⚙️ Run DE analysis
+dds <- DESeq(dds)
+
+# 📋 Extract results
+res <- results(dds)
+
+# 🧼 Clean and organize results
+res_df <- as.data.frame(res) %>%
+  rownames_to_column("gene") %>%
+  arrange(padj)
+
+# 💾 Save for downstream visualization (if not already saved)
+if (!file.exists("data/deseq2_results.csv")) {
+  write_csv(res_df, "data/deseq2_results.csv")
+}
+
+# 👁️ Preview top results
+head(res_df, 5)
+```
+
+To execute the analysis before continuing to the downstream Q&A, run this on the command line:
+
+```bash
+Rscript scripts/res-df.R
+```
+
+> ✅ **Takeaway:** DESeq2 provides robust statistical testing for identifying differentially expressed genes. Always inspect and sort results by adjusted p-value (`padj`) to focus on the most significant findings.
+
+---
+
+### What the Script Does {-}
+
+> 🔧 The script performs the following:
+> - Loads `counts.csv` and `metadata.csv`  
+> - Runs DESeq2 for differential expression analysis  
+> - Saves cleaned outputs to the `data/` folder  
+
+---
+
+### Output Files {-}
+
+After running the script, your `data/` folder will contain:
+
+- ✅ `demo_counts.csv` — the (optionally cleaned) count matrix  
+- ✅ `demo_metadata.csv` — the sample metadata  
+- ✅ `deseq2_results.csv` — DESeq2 differential expression results
