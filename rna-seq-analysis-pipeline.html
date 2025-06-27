@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Getting Started: Preparing RNA-Seq Data for Analysis | rnaseq.knit</title>
+  <title>RNA-Seq Analysis Pipeline | rnaseq.knit</title>
   <meta name="description" content="🧬 RNA-Seq Data Science" />
   <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Getting Started: Preparing RNA-Seq Data for Analysis | rnaseq.knit" />
+  <meta property="og:title" content="RNA-Seq Analysis Pipeline | rnaseq.knit" />
   <meta property="og:type" content="book" />
   
   
   <meta name="github-repo" content="https://github.com/datainsights/cdi-rnaseq/" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Getting Started: Preparing RNA-Seq Data for Analysis | rnaseq.knit" />
+  <meta name="twitter:title" content="RNA-Seq Analysis Pipeline | rnaseq.knit" />
   
   
   
@@ -29,7 +29,7 @@
   
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 <link rel="prev" href="welcome-to-the-rna-seq-qa-guide.html"/>
-<link rel="next" href="how-do-you-explore-total-read-counts-per-sample-before-normalization.html"/>
+<link rel="next" href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -140,39 +140,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="divider"></li>
 <li><a href="index.html#section" id="toc-section"></a></li>
 <li class="chapter" data-level="" data-path="welcome-to-the-rna-seq-qa-guide.html"><a href="welcome-to-the-rna-seq-qa-guide.html"><i class="fa fa-check"></i>🌱 Welcome to the RNA-Seq Q&amp;A Guide</a></li>
-<li class="chapter" data-level="" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i>Getting Started: Preparing RNA-Seq Data for Analysis</a>
+<li class="chapter" data-level="" data-path="rna-seq-analysis-pipeline.html"><a href="rna-seq-analysis-pipeline.html"><i class="fa fa-check"></i>RNA-Seq Analysis Pipeline</a>
 <ul>
-<li class="chapter" data-level="" data-path="getting-started.html"><a href="getting-started.html#prerequisite"><i class="fa fa-check"></i>Prerequisite</a></li>
-<li class="chapter" data-level="" data-path="getting-started.html"><a href="getting-started.html#step-1-run-deseq2-in-r"><i class="fa fa-check"></i>Step 1: Run DESeq2 in R</a></li>
-<li class="chapter" data-level="" data-path="getting-started.html"><a href="getting-started.html#output-files"><i class="fa fa-check"></i>Output Files</a></li>
-<li class="chapter" data-level="" data-path="getting-started.html"><a href="getting-started.html#quick-glimpse-how-the-demo-data-was-generated"><i class="fa fa-check"></i>Quick Glimpse: How the Demo Data Was Generated</a></li>
+<li class="chapter" data-level="" data-path="rna-seq-analysis-pipeline.html"><a href="rna-seq-analysis-pipeline.html#materials-and-methods"><i class="fa fa-check"></i>Materials and Methods</a></li>
+<li class="chapter" data-level="" data-path="rna-seq-analysis-pipeline.html"><a href="rna-seq-analysis-pipeline.html#output-of-the-rna-seq-pipeline"><i class="fa fa-check"></i>Output of the RNA-Seq Pipeline</a></li>
 </ul></li>
-<li class="part"><span><b>I COUNT EXPLORATION</b></span></li>
-<li class="chapter" data-level="1" data-path="how-do-you-explore-total-read-counts-per-sample-before-normalization.html"><a href="how-do-you-explore-total-read-counts-per-sample-before-normalization.html"><i class="fa fa-check"></i><b>1</b> How do you explore total read counts per sample before normalization?</a>
+<li class="part"><span><b>I DIFFERENTIAL GENE EXPRESSION</b></span></li>
+<li class="chapter" data-level="1" data-path="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html"><i class="fa fa-check"></i><b>1</b> How do you perform differential gene expression analysis using DESeq2?</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="how-do-you-explore-total-read-counts-per-sample-before-normalization.html"><a href="how-do-you-explore-total-read-counts-per-sample-before-normalization.html#explanation"><i class="fa fa-check"></i><b>1.1</b> Explanation</a></li>
-<li class="chapter" data-level="1.2" data-path="how-do-you-explore-total-read-counts-per-sample-before-normalization.html"><a href="how-do-you-explore-total-read-counts-per-sample-before-normalization.html#python-code"><i class="fa fa-check"></i><b>1.2</b> Python Code</a></li>
-<li class="chapter" data-level="1.3" data-path="how-do-you-explore-total-read-counts-per-sample-before-normalization.html"><a href="how-do-you-explore-total-read-counts-per-sample-before-normalization.html#r-code"><i class="fa fa-check"></i><b>1.3</b> R Code</a></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering.html"><a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering.html"><i class="fa fa-check"></i><b>2</b> How do you log-transform RNA-Seq counts for PCA or clustering?</a>
+<li class="chapter" data-level="1.1" data-path="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html#explanation"><i class="fa fa-check"></i><b>1.1</b> Explanation</a></li>
+<li class="chapter" data-level="1.2" data-path="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html#python-code"><i class="fa fa-check"></i><b>1.2</b> Python Code</a></li>
+<li class="chapter" data-level="1.3" data-path="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html#r-code"><i class="fa fa-check"></i><b>1.3</b> R Code</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering.html"><a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering.html#explanation-1"><i class="fa fa-check"></i><b>2.1</b> Explanation</a></li>
-<li class="chapter" data-level="2.2" data-path="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering.html"><a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering.html#python-code-1"><i class="fa fa-check"></i><b>2.2</b> Python Code</a></li>
-<li class="chapter" data-level="2.3" data-path="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering.html"><a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering.html#r-code-1"><i class="fa fa-check"></i><b>2.3</b> R Code</a></li>
+<li class="chapter" data-level="" data-path="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html#what-the-script-does"><i class="fa fa-check"></i>What the Script Does</a></li>
+<li class="chapter" data-level="" data-path="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html#output-files"><i class="fa fa-check"></i>Output Files</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="how-do-you-perform-pca-to-explore-sample-similarity.html"><a href="how-do-you-perform-pca-to-explore-sample-similarity.html"><i class="fa fa-check"></i><b>3</b> How do you perform PCA to explore sample similarity?</a>
+</ul></li>
+<li class="part"><span><b>II COUNT EXPLORATION</b></span></li>
+<li class="chapter" data-level="2" data-path="how-do-you-explore-total-read-counts-per-sample-before-normalization.html"><a href="how-do-you-explore-total-read-counts-per-sample-before-normalization.html"><i class="fa fa-check"></i><b>2</b> How do you explore total read counts per sample before normalization?</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="how-do-you-perform-pca-to-explore-sample-similarity.html"><a href="how-do-you-perform-pca-to-explore-sample-similarity.html#explanation-2"><i class="fa fa-check"></i><b>3.1</b> Explanation</a></li>
-<li class="chapter" data-level="3.2" data-path="how-do-you-perform-pca-to-explore-sample-similarity.html"><a href="how-do-you-perform-pca-to-explore-sample-similarity.html#python-code-2"><i class="fa fa-check"></i><b>3.2</b> Python Code</a></li>
-<li class="chapter" data-level="3.3" data-path="how-do-you-perform-pca-to-explore-sample-similarity.html"><a href="how-do-you-perform-pca-to-explore-sample-similarity.html#r-code-2"><i class="fa fa-check"></i><b>3.3</b> R Code</a></li>
+<li class="chapter" data-level="2.1" data-path="how-do-you-explore-total-read-counts-per-sample-before-normalization.html"><a href="how-do-you-explore-total-read-counts-per-sample-before-normalization.html#explanation-1"><i class="fa fa-check"></i><b>2.1</b> Explanation</a></li>
+<li class="chapter" data-level="2.2" data-path="how-do-you-explore-total-read-counts-per-sample-before-normalization.html"><a href="how-do-you-explore-total-read-counts-per-sample-before-normalization.html#python-code-1"><i class="fa fa-check"></i><b>2.2</b> Python Code</a></li>
+<li class="chapter" data-level="2.3" data-path="how-do-you-explore-total-read-counts-per-sample-before-normalization.html"><a href="how-do-you-explore-total-read-counts-per-sample-before-normalization.html#r-code-1"><i class="fa fa-check"></i><b>2.3</b> R Code</a></li>
 </ul></li>
-<li class="part"><span><b>II DIFFERENTIAL GENE EXPRESSION</b></span></li>
-<li class="chapter" data-level="4" data-path="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html"><i class="fa fa-check"></i><b>4</b> How do you perform differential gene expression analysis using DESeq2?</a>
+<li class="chapter" data-level="3" data-path="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering.html"><a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering.html"><i class="fa fa-check"></i><b>3</b> How do you log-transform RNA-Seq counts for PCA or clustering?</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html#explanation-3"><i class="fa fa-check"></i><b>4.1</b> Explanation</a></li>
-<li class="chapter" data-level="4.2" data-path="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html#python-code-3"><i class="fa fa-check"></i><b>4.2</b> Python Code</a></li>
-<li class="chapter" data-level="4.3" data-path="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html#r-code-3"><i class="fa fa-check"></i><b>4.3</b> R Code</a></li>
+<li class="chapter" data-level="3.1" data-path="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering.html"><a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering.html#explanation-2"><i class="fa fa-check"></i><b>3.1</b> Explanation</a></li>
+<li class="chapter" data-level="3.2" data-path="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering.html"><a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering.html#python-code-2"><i class="fa fa-check"></i><b>3.2</b> Python Code</a></li>
+<li class="chapter" data-level="3.3" data-path="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering.html"><a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering.html#r-code-2"><i class="fa fa-check"></i><b>3.3</b> R Code</a></li>
 </ul></li>
+<li class="chapter" data-level="4" data-path="how-do-you-perform-pca-to-explore-sample-similarity.html"><a href="how-do-you-perform-pca-to-explore-sample-similarity.html"><i class="fa fa-check"></i><b>4</b> How do you perform PCA to explore sample similarity?</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="how-do-you-perform-pca-to-explore-sample-similarity.html"><a href="how-do-you-perform-pca-to-explore-sample-similarity.html#explanation-3"><i class="fa fa-check"></i><b>4.1</b> Explanation</a></li>
+<li class="chapter" data-level="4.2" data-path="how-do-you-perform-pca-to-explore-sample-similarity.html"><a href="how-do-you-perform-pca-to-explore-sample-similarity.html#python-code-3"><i class="fa fa-check"></i><b>4.2</b> Python Code</a></li>
+<li class="chapter" data-level="4.3" data-path="how-do-you-perform-pca-to-explore-sample-similarity.html"><a href="how-do-you-perform-pca-to-explore-sample-similarity.html#r-code-3"><i class="fa fa-check"></i><b>4.3</b> R Code</a></li>
+</ul></li>
+<li class="part"><span><b>III GENE EXPRESSION VISUALIZATION</b></span></li>
 <li class="chapter" data-level="5" data-path="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html"><i class="fa fa-check"></i><b>5</b> How do you visualize differentially expressed genes with a volcano plot?</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#explanation-4"><i class="fa fa-check"></i><b>5.1</b> Explanation</a></li>
@@ -211,67 +214,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="getting-started" class="section level1 unnumbered hasAnchor">
-<h1>Getting Started: Preparing RNA-Seq Data for Analysis<a href="getting-started.html#getting-started" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="prerequisite" class="section level2 unnumbered hasAnchor">
-<h2>Prerequisite<a href="getting-started.html#prerequisite" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Before using this CDI Q&amp;A guide, you need input files that are typically generated from an upstream RNA-Seq pipeline (e.g., using <strong>STAR</strong>, <strong>featureCounts</strong>, or <strong>HTSeq-count</strong>):</p>
+<div id="rna-seq-analysis-pipeline" class="section level1 unnumbered hasAnchor">
+<h1>RNA-Seq Analysis Pipeline<a href="rna-seq-analysis-pipeline.html#rna-seq-analysis-pipeline" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="materials-and-methods" class="section level2 unnumbered hasAnchor">
+<h2>Materials and Methods<a href="rna-seq-analysis-pipeline.html#materials-and-methods" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A typical RNA-Seq dataset is generated using a standard, reproducible pipeline. Below is an overview of the materials and methods used to generate the demo dataset in this guide. This information is provided for transparency—<strong>you do not need to reproduce these steps</strong> to follow the Q&amp;A guide.</p>
 <ul>
-<li><code>counts.csv</code> — the raw gene count matrix (genes × samples)<br />
-</li>
-<li><code>metadata.csv</code> — sample information, including experimental condition or batch</li>
-</ul>
-<blockquote>
-<p>🎯 <strong>Note:</strong> Each user may have their own preferred tools and pipelines to generate these files. That part is considered background work and is <strong>not covered</strong> in this guide.<br />
-Once you have these two input files, you’re ready to enter the <strong>CDI Q&amp;A learning ecosystem</strong>.</p>
-</blockquote>
-</div>
-<div id="step-1-run-deseq2-in-r" class="section level2 unnumbered hasAnchor">
-<h2>Step 1: Run DESeq2 in R<a href="getting-started.html#step-1-run-deseq2-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>To generate the analysis-ready files for use in this Q&amp;A guide, run the provided R script using the command line:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="getting-started.html#cb1-1" tabindex="-1"></a><span class="ex">Rscript</span> scripts/res-df.R</span></code></pre></div>
-<p>🔧 This script will:</p>
-<blockquote>
-<ul>
-<li>Load <code>counts.csv</code> and <code>metadata.csv</code></li>
-<li>Run DESeq2 for differential expression analysis</li>
-<li>Save cleaned outputs to the <code>data/</code> folder</li>
-</ul>
-</blockquote>
-</div>
-<div id="output-files" class="section level2 unnumbered hasAnchor">
-<h2>Output Files<a href="getting-started.html#output-files" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>After running the script, your <code>data/</code> folder will contain:</p>
-<ul>
-<li>✅ <code>demo_counts.csv</code> — the (optionally cleaned) count matrix<br />
-</li>
-<li>✅ <code>demo_metadata.csv</code> — the sample metadata<br />
-</li>
-<li>✅ <code>deseq2_results.csv</code> — DESeq2 differential expression results</li>
-</ul>
-<hr />
-</div>
-<div id="quick-glimpse-how-the-demo-data-was-generated" class="section level2 unnumbered hasAnchor">
-<h2>Quick Glimpse: How the Demo Data Was Generated<a href="getting-started.html#quick-glimpse-how-the-demo-data-was-generated" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The RNA-Seq dataset used in this guide was generated using a standard, reproducible pipeline. This overview is provided for transparency—you do <strong>not</strong> need to reproduce these steps to follow the guide.</p>
-<ul>
-<li>🧪 <strong>Data type</strong>: Paired-end RNA-Seq<br />
+<li>🧪 <strong>Data Type</strong>: Paired-end RNA-Seq<br />
 </li>
 <li>✂️ <strong>Preprocessing</strong>: Adapter trimming performed with <strong>Cutadapt</strong><br />
 </li>
-<li>🚀 <strong>Alignment</strong>: Reads were mapped to the <em>Saccharomyces cerevisiae</em> genome using <strong>STAR</strong><br />
+<li>🚀 <strong>Alignment</strong>: Reads aligned to the <em>Saccharomyces cerevisiae</em> genome using <strong>STAR</strong><br />
 </li>
-<li>🛠 <strong>Pipeline orchestration</strong>: Implemented using <strong>Snakemake</strong> from the Workflow Catalog<br />
+<li>🛠 <strong>Pipeline Orchestration</strong>: Managed using <strong>Snakemake</strong> (from the Workflow Catalog)<br />
 </li>
-<li>📊 <strong>Quantification</strong>: Gene counts were generated by STAR and compiled into a TSV table<br />
+<li>📊 <strong>Quantification</strong>: Gene counts generated directly by STAR and compiled into a TSV table<br />
 </li>
-<li>📈 <strong>Differential Expression</strong>: Conducted with <strong>DESeq2</strong> using the official Bioconductor guidelines<br />
+<li>📈 <strong>Differential Expression</strong>: Performed with <strong>DESeq2</strong> following Bioconductor best practices<br />
 </li>
-<li>⚙️ <strong>Parallelization</strong>: The DESeq2 step was assigned <strong>3 CPU cores</strong></li>
+<li>⚙️ <strong>Parallelization</strong>: DESeq2 assigned <strong>3 CPU cores</strong> for efficiency</li>
 </ul>
 <hr />
-<p>✅ <strong>You are now ready to begin the CDI Q&amp;A journey</strong>, exploring and visualizing RNA-Seq results using <strong>Python, R, and Bash</strong>.</p>
-<p>The next sections will walk you through each question—step by step—with explanations, code, and visuals.</p>
+</div>
+<div id="output-of-the-rna-seq-pipeline" class="section level2 unnumbered hasAnchor">
+<h2>Output of the RNA-Seq Pipeline<a href="rna-seq-analysis-pipeline.html#output-of-the-rna-seq-pipeline" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Before starting downstream analysis, you will need output files generated from the upstream RNA-Seq workflow (e.g., STAR + featureCounts or HTSeq-count):</p>
+<ul>
+<li><code>counts.csv</code> — a raw gene count matrix (genes × samples)<br />
+</li>
+<li><code>metadata.csv</code> — sample metadata including condition, group, or batch information</li>
+</ul>
+<blockquote>
+<p>🎯 <strong>Note:</strong> Each user may rely on different pipelines or tools to generate these files. That upstream processing is considered <strong>background work</strong> and is not covered in this guide.<br />
+Once you have these two input files, you’re ready to enter the <strong>CDI Q&amp;A learning ecosystem</strong>, which guides you through <strong>Exploratory Data Analysis (EDA)</strong>, <strong>Visualization (VIZ)</strong>, <strong>Statistical Analysis (STATS)</strong>, and <strong>Machine Learning (ML)</strong>.</p>
+</blockquote>
+<hr />
+<p>✅ <strong>You are now ready to begin the CDI Q&amp;A journey</strong>, exploring and interpreting RNA-Seq results using <strong>R, Python, and Bash</strong>.</p>
+<p>The next sections will guide you—question by question—with clear explanations, reproducible code, and visuals.</p>
 
 </div>
 </div>
@@ -284,7 +263,7 @@ Once you have these two input files, you’re ready to enter the <strong>CDI Q&a
         </div>
       </div>
 <a href="welcome-to-the-rna-seq-qa-guide.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="how-do-you-explore-total-read-counts-per-sample-before-normalization.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -28,7 +28,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-<link rel="prev" href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html"/>
+<link rel="prev" href="how-do-you-perform-pca-to-explore-sample-similarity.html"/>
 <link rel="next" href="how-do-you-visualize-the-expression-of-a-single-gene-with-a-boxplot.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -140,39 +140,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="divider"></li>
 <li><a href="index.html#section" id="toc-section"></a></li>
 <li class="chapter" data-level="" data-path="welcome-to-the-rna-seq-qa-guide.html"><a href="welcome-to-the-rna-seq-qa-guide.html"><i class="fa fa-check"></i>🌱 Welcome to the RNA-Seq Q&amp;A Guide</a></li>
-<li class="chapter" data-level="" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i>Getting Started: Preparing RNA-Seq Data for Analysis</a>
+<li class="chapter" data-level="" data-path="rna-seq-analysis-pipeline.html"><a href="rna-seq-analysis-pipeline.html"><i class="fa fa-check"></i>RNA-Seq Analysis Pipeline</a>
 <ul>
-<li class="chapter" data-level="" data-path="getting-started.html"><a href="getting-started.html#prerequisite"><i class="fa fa-check"></i>Prerequisite</a></li>
-<li class="chapter" data-level="" data-path="getting-started.html"><a href="getting-started.html#step-1-run-deseq2-in-r"><i class="fa fa-check"></i>Step 1: Run DESeq2 in R</a></li>
-<li class="chapter" data-level="" data-path="getting-started.html"><a href="getting-started.html#output-files"><i class="fa fa-check"></i>Output Files</a></li>
-<li class="chapter" data-level="" data-path="getting-started.html"><a href="getting-started.html#quick-glimpse-how-the-demo-data-was-generated"><i class="fa fa-check"></i>Quick Glimpse: How the Demo Data Was Generated</a></li>
+<li class="chapter" data-level="" data-path="rna-seq-analysis-pipeline.html"><a href="rna-seq-analysis-pipeline.html#materials-and-methods"><i class="fa fa-check"></i>Materials and Methods</a></li>
+<li class="chapter" data-level="" data-path="rna-seq-analysis-pipeline.html"><a href="rna-seq-analysis-pipeline.html#output-of-the-rna-seq-pipeline"><i class="fa fa-check"></i>Output of the RNA-Seq Pipeline</a></li>
 </ul></li>
-<li class="part"><span><b>I COUNT EXPLORATION</b></span></li>
-<li class="chapter" data-level="1" data-path="how-do-you-explore-total-read-counts-per-sample-before-normalization.html"><a href="how-do-you-explore-total-read-counts-per-sample-before-normalization.html"><i class="fa fa-check"></i><b>1</b> How do you explore total read counts per sample before normalization?</a>
+<li class="part"><span><b>I DIFFERENTIAL GENE EXPRESSION</b></span></li>
+<li class="chapter" data-level="1" data-path="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html"><i class="fa fa-check"></i><b>1</b> How do you perform differential gene expression analysis using DESeq2?</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="how-do-you-explore-total-read-counts-per-sample-before-normalization.html"><a href="how-do-you-explore-total-read-counts-per-sample-before-normalization.html#explanation"><i class="fa fa-check"></i><b>1.1</b> Explanation</a></li>
-<li class="chapter" data-level="1.2" data-path="how-do-you-explore-total-read-counts-per-sample-before-normalization.html"><a href="how-do-you-explore-total-read-counts-per-sample-before-normalization.html#python-code"><i class="fa fa-check"></i><b>1.2</b> Python Code</a></li>
-<li class="chapter" data-level="1.3" data-path="how-do-you-explore-total-read-counts-per-sample-before-normalization.html"><a href="how-do-you-explore-total-read-counts-per-sample-before-normalization.html#r-code"><i class="fa fa-check"></i><b>1.3</b> R Code</a></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering.html"><a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering.html"><i class="fa fa-check"></i><b>2</b> How do you log-transform RNA-Seq counts for PCA or clustering?</a>
+<li class="chapter" data-level="1.1" data-path="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html#explanation"><i class="fa fa-check"></i><b>1.1</b> Explanation</a></li>
+<li class="chapter" data-level="1.2" data-path="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html#python-code"><i class="fa fa-check"></i><b>1.2</b> Python Code</a></li>
+<li class="chapter" data-level="1.3" data-path="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html#r-code"><i class="fa fa-check"></i><b>1.3</b> R Code</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering.html"><a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering.html#explanation-1"><i class="fa fa-check"></i><b>2.1</b> Explanation</a></li>
-<li class="chapter" data-level="2.2" data-path="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering.html"><a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering.html#python-code-1"><i class="fa fa-check"></i><b>2.2</b> Python Code</a></li>
-<li class="chapter" data-level="2.3" data-path="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering.html"><a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering.html#r-code-1"><i class="fa fa-check"></i><b>2.3</b> R Code</a></li>
+<li class="chapter" data-level="" data-path="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html#what-the-script-does"><i class="fa fa-check"></i>What the Script Does</a></li>
+<li class="chapter" data-level="" data-path="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html#output-files"><i class="fa fa-check"></i>Output Files</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="how-do-you-perform-pca-to-explore-sample-similarity.html"><a href="how-do-you-perform-pca-to-explore-sample-similarity.html"><i class="fa fa-check"></i><b>3</b> How do you perform PCA to explore sample similarity?</a>
+</ul></li>
+<li class="part"><span><b>II COUNT EXPLORATION</b></span></li>
+<li class="chapter" data-level="2" data-path="how-do-you-explore-total-read-counts-per-sample-before-normalization.html"><a href="how-do-you-explore-total-read-counts-per-sample-before-normalization.html"><i class="fa fa-check"></i><b>2</b> How do you explore total read counts per sample before normalization?</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="how-do-you-perform-pca-to-explore-sample-similarity.html"><a href="how-do-you-perform-pca-to-explore-sample-similarity.html#explanation-2"><i class="fa fa-check"></i><b>3.1</b> Explanation</a></li>
-<li class="chapter" data-level="3.2" data-path="how-do-you-perform-pca-to-explore-sample-similarity.html"><a href="how-do-you-perform-pca-to-explore-sample-similarity.html#python-code-2"><i class="fa fa-check"></i><b>3.2</b> Python Code</a></li>
-<li class="chapter" data-level="3.3" data-path="how-do-you-perform-pca-to-explore-sample-similarity.html"><a href="how-do-you-perform-pca-to-explore-sample-similarity.html#r-code-2"><i class="fa fa-check"></i><b>3.3</b> R Code</a></li>
+<li class="chapter" data-level="2.1" data-path="how-do-you-explore-total-read-counts-per-sample-before-normalization.html"><a href="how-do-you-explore-total-read-counts-per-sample-before-normalization.html#explanation-1"><i class="fa fa-check"></i><b>2.1</b> Explanation</a></li>
+<li class="chapter" data-level="2.2" data-path="how-do-you-explore-total-read-counts-per-sample-before-normalization.html"><a href="how-do-you-explore-total-read-counts-per-sample-before-normalization.html#python-code-1"><i class="fa fa-check"></i><b>2.2</b> Python Code</a></li>
+<li class="chapter" data-level="2.3" data-path="how-do-you-explore-total-read-counts-per-sample-before-normalization.html"><a href="how-do-you-explore-total-read-counts-per-sample-before-normalization.html#r-code-1"><i class="fa fa-check"></i><b>2.3</b> R Code</a></li>
 </ul></li>
-<li class="part"><span><b>II DIFFERENTIAL GENE EXPRESSION</b></span></li>
-<li class="chapter" data-level="4" data-path="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html"><i class="fa fa-check"></i><b>4</b> How do you perform differential gene expression analysis using DESeq2?</a>
+<li class="chapter" data-level="3" data-path="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering.html"><a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering.html"><i class="fa fa-check"></i><b>3</b> How do you log-transform RNA-Seq counts for PCA or clustering?</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html#explanation-3"><i class="fa fa-check"></i><b>4.1</b> Explanation</a></li>
-<li class="chapter" data-level="4.2" data-path="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html#python-code-3"><i class="fa fa-check"></i><b>4.2</b> Python Code</a></li>
-<li class="chapter" data-level="4.3" data-path="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html#r-code-3"><i class="fa fa-check"></i><b>4.3</b> R Code</a></li>
+<li class="chapter" data-level="3.1" data-path="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering.html"><a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering.html#explanation-2"><i class="fa fa-check"></i><b>3.1</b> Explanation</a></li>
+<li class="chapter" data-level="3.2" data-path="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering.html"><a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering.html#python-code-2"><i class="fa fa-check"></i><b>3.2</b> Python Code</a></li>
+<li class="chapter" data-level="3.3" data-path="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering.html"><a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering.html#r-code-2"><i class="fa fa-check"></i><b>3.3</b> R Code</a></li>
 </ul></li>
+<li class="chapter" data-level="4" data-path="how-do-you-perform-pca-to-explore-sample-similarity.html"><a href="how-do-you-perform-pca-to-explore-sample-similarity.html"><i class="fa fa-check"></i><b>4</b> How do you perform PCA to explore sample similarity?</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="how-do-you-perform-pca-to-explore-sample-similarity.html"><a href="how-do-you-perform-pca-to-explore-sample-similarity.html#explanation-3"><i class="fa fa-check"></i><b>4.1</b> Explanation</a></li>
+<li class="chapter" data-level="4.2" data-path="how-do-you-perform-pca-to-explore-sample-similarity.html"><a href="how-do-you-perform-pca-to-explore-sample-similarity.html#python-code-3"><i class="fa fa-check"></i><b>4.2</b> Python Code</a></li>
+<li class="chapter" data-level="4.3" data-path="how-do-you-perform-pca-to-explore-sample-similarity.html"><a href="how-do-you-perform-pca-to-explore-sample-similarity.html#r-code-3"><i class="fa fa-check"></i><b>4.3</b> R Code</a></li>
+</ul></li>
+<li class="part"><span><b>III GENE EXPRESSION VISUALIZATION</b></span></li>
 <li class="chapter" data-level="5" data-path="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html"><i class="fa fa-check"></i><b>5</b> How do you visualize differentially expressed genes with a volcano plot?</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#explanation-4"><i class="fa fa-check"></i><b>5.1</b> Explanation</a></li>
@@ -225,59 +228,56 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="python-code-4" class="section level2 hasAnchor" number="5.2">
 <h2><span class="header-section-number">5.2</span> Python Code<a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#python-code-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<blockquote>
-<p>ℹ️ Make sure the file <code>data/deseq2_results.csv</code> has already been saved by the (above) R code from the DESeq2 step.</p>
-</blockquote>
-<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-1" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb14-2"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-2" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb14-3"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-3" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb14-4"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-4" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb14-5"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-5" tabindex="-1"></a></span>
-<span id="cb14-6"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-6" tabindex="-1"></a><span class="co"># 🔹 Load DE results (exported from R)</span></span>
-<span id="cb14-7"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-7" tabindex="-1"></a>res_df <span class="op">=</span> pd.read_csv(<span class="st">&quot;data/deseq2_results.csv&quot;</span>)</span>
-<span id="cb14-8"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-8" tabindex="-1"></a></span>
-<span id="cb14-9"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-9" tabindex="-1"></a><span class="co"># 🧪 Add significance status</span></span>
-<span id="cb14-10"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-10" tabindex="-1"></a>res_df[<span class="st">&quot;significant&quot;</span>] <span class="op">=</span> (res_df[<span class="st">&quot;padj&quot;</span>] <span class="op">&lt;</span> <span class="fl">0.05</span>) <span class="op">&amp;</span> (<span class="bu">abs</span>(res_df[<span class="st">&quot;log2FoldChange&quot;</span>]) <span class="op">&gt;</span> <span class="dv">1</span>)</span>
-<span id="cb14-11"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-11" tabindex="-1"></a></span>
-<span id="cb14-12"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-12" tabindex="-1"></a><span class="co"># 📊 Volcano plot</span></span>
-<span id="cb14-13"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-13" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb14-14"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-14" tabindex="-1"></a>sns.scatterplot(data<span class="op">=</span>res_df,</span>
-<span id="cb14-15"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-15" tabindex="-1"></a>                x<span class="op">=</span><span class="st">&quot;log2FoldChange&quot;</span>,</span>
-<span id="cb14-16"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-16" tabindex="-1"></a>                y<span class="op">=-</span>np.log10(res_df[<span class="st">&quot;padj&quot;</span>]),</span>
-<span id="cb14-17"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-17" tabindex="-1"></a>                hue<span class="op">=</span><span class="st">&quot;significant&quot;</span>,</span>
-<span id="cb14-18"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-18" tabindex="-1"></a>                palette<span class="op">=</span>{<span class="va">True</span>: <span class="st">&quot;red&quot;</span>, <span class="va">False</span>: <span class="st">&quot;gray&quot;</span>},</span>
-<span id="cb14-19"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-19" tabindex="-1"></a>                alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
-<span id="cb14-20"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-20" tabindex="-1"></a>plt.axhline(<span class="op">-</span>np.log10(<span class="fl">0.05</span>), linestyle<span class="op">=</span><span class="st">&quot;--&quot;</span>, color<span class="op">=</span><span class="st">&quot;black&quot;</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb14-21"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-21" tabindex="-1"></a>plt.axvline(x<span class="op">=-</span><span class="dv">1</span>, linestyle<span class="op">=</span><span class="st">&quot;--&quot;</span>, color<span class="op">=</span><span class="st">&quot;black&quot;</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb14-22"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-22" tabindex="-1"></a>plt.axvline(x<span class="op">=</span><span class="dv">1</span>, linestyle<span class="op">=</span><span class="st">&quot;--&quot;</span>, color<span class="op">=</span><span class="st">&quot;black&quot;</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb14-23"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-23" tabindex="-1"></a>plt.title(<span class="st">&quot;Volcano Plot of Differential Expression&quot;</span>)</span>
-<span id="cb14-24"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-24" tabindex="-1"></a>plt.xlabel(<span class="st">&quot;Log2 Fold Change&quot;</span>)</span>
-<span id="cb14-25"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-25" tabindex="-1"></a>plt.ylabel(<span class="st">&quot;-Log10 Adjusted P-Value&quot;</span>)</span>
-<span id="cb14-26"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-26" tabindex="-1"></a>plt.legend(title<span class="op">=</span><span class="st">&quot;Significant&quot;</span>)</span>
-<span id="cb14-27"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-27" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb14-28"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-28" tabindex="-1"></a>plt.show()</span>
-<span id="cb14-29"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-29" tabindex="-1"></a></span></code></pre></div>
-<p><img src="03-1-rnaseq_files/03-1-rnaseq_13_0.png" /></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb13-1" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb13-2"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb13-2" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb13-3"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb13-3" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb13-4"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb13-4" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb13-5"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb13-5" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb13-6" tabindex="-1"></a><span class="co"># 🔹 Load DE results (exported from R)</span></span>
+<span id="cb13-7"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb13-7" tabindex="-1"></a>res_df <span class="op">=</span> pd.read_csv(<span class="st">&quot;data/deseq2_results.csv&quot;</span>)</span>
+<span id="cb13-8"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb13-8" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb13-9" tabindex="-1"></a><span class="co"># 🧪 Add significance status</span></span>
+<span id="cb13-10"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb13-10" tabindex="-1"></a>res_df[<span class="st">&quot;significant&quot;</span>] <span class="op">=</span> (res_df[<span class="st">&quot;padj&quot;</span>] <span class="op">&lt;</span> <span class="fl">0.05</span>) <span class="op">&amp;</span> (<span class="bu">abs</span>(res_df[<span class="st">&quot;log2FoldChange&quot;</span>]) <span class="op">&gt;</span> <span class="dv">1</span>)</span>
+<span id="cb13-11"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb13-11" tabindex="-1"></a></span>
+<span id="cb13-12"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb13-12" tabindex="-1"></a><span class="co"># 📊 Volcano plot</span></span>
+<span id="cb13-13"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb13-13" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb13-14"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb13-14" tabindex="-1"></a>sns.scatterplot(data<span class="op">=</span>res_df,</span>
+<span id="cb13-15"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb13-15" tabindex="-1"></a>                x<span class="op">=</span><span class="st">&quot;log2FoldChange&quot;</span>,</span>
+<span id="cb13-16"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb13-16" tabindex="-1"></a>                y<span class="op">=-</span>np.log10(res_df[<span class="st">&quot;padj&quot;</span>]),</span>
+<span id="cb13-17"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb13-17" tabindex="-1"></a>                hue<span class="op">=</span><span class="st">&quot;significant&quot;</span>,</span>
+<span id="cb13-18"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb13-18" tabindex="-1"></a>                palette<span class="op">=</span>{<span class="va">True</span>: <span class="st">&quot;red&quot;</span>, <span class="va">False</span>: <span class="st">&quot;gray&quot;</span>},</span>
+<span id="cb13-19"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb13-19" tabindex="-1"></a>                alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
+<span id="cb13-20"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb13-20" tabindex="-1"></a>plt.axhline(<span class="op">-</span>np.log10(<span class="fl">0.05</span>), linestyle<span class="op">=</span><span class="st">&quot;--&quot;</span>, color<span class="op">=</span><span class="st">&quot;black&quot;</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb13-21"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb13-21" tabindex="-1"></a>plt.axvline(x<span class="op">=-</span><span class="dv">1</span>, linestyle<span class="op">=</span><span class="st">&quot;--&quot;</span>, color<span class="op">=</span><span class="st">&quot;black&quot;</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb13-22"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb13-22" tabindex="-1"></a>plt.axvline(x<span class="op">=</span><span class="dv">1</span>, linestyle<span class="op">=</span><span class="st">&quot;--&quot;</span>, color<span class="op">=</span><span class="st">&quot;black&quot;</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb13-23"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb13-23" tabindex="-1"></a>plt.title(<span class="st">&quot;Volcano Plot of Differential Expression&quot;</span>)</span>
+<span id="cb13-24"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb13-24" tabindex="-1"></a>plt.xlabel(<span class="st">&quot;Log2 Fold Change&quot;</span>)</span>
+<span id="cb13-25"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb13-25" tabindex="-1"></a>plt.ylabel(<span class="st">&quot;-Log10 Adjusted P-Value&quot;</span>)</span>
+<span id="cb13-26"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb13-26" tabindex="-1"></a>plt.legend(title<span class="op">=</span><span class="st">&quot;Significant&quot;</span>)</span>
+<span id="cb13-27"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb13-27" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb13-28"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb13-28" tabindex="-1"></a>plt.show()</span>
+<span id="cb13-29"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb13-29" tabindex="-1"></a></span></code></pre></div>
+<p><img src="03-1-rnaseq-viz_files/03-1-rnaseq-viz_2_0.png" /></p>
 </div>
 <div id="r-code-4" class="section level2 hasAnchor" number="5.3">
 <h2><span class="header-section-number">5.3</span> R Code<a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#r-code-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb15-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb15-2"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb15-2" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb15-3" tabindex="-1"></a><span class="co"># 🔹 Load saved DESeq2 results from CSV</span></span>
-<span id="cb15-4"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb15-4" tabindex="-1"></a>res_df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/deseq2_results.csv&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb15-5"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb15-5" tabindex="-1"></a>  <span class="fu">drop_na</span>(log2FoldChange, padj) <span class="sc">%&gt;%</span></span>
-<span id="cb15-6"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb15-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">significant =</span> padj <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> <span class="fu">abs</span>(log2FoldChange) <span class="sc">&gt;</span> <span class="dv">1</span>)</span>
-<span id="cb15-7"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb15-7" tabindex="-1"></a></span>
-<span id="cb15-8"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb15-8" tabindex="-1"></a><span class="co"># 📊 Volcano plot</span></span>
-<span id="cb15-9"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb15-9" tabindex="-1"></a><span class="fu">ggplot</span>(res_df, <span class="fu">aes</span>(<span class="at">x =</span> log2FoldChange, <span class="at">y =</span> <span class="sc">-</span><span class="fu">log10</span>(padj), <span class="at">color =</span> significant)) <span class="sc">+</span></span>
-<span id="cb15-10"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb15-10" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb15-11"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb15-11" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;FALSE&quot;</span> <span class="ot">=</span> <span class="st">&quot;gray&quot;</span>, <span class="st">&quot;TRUE&quot;</span> <span class="ot">=</span> <span class="st">&quot;red&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb15-12"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb15-12" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span></span>
-<span id="cb15-13"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb15-13" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="sc">-</span><span class="fu">log10</span>(<span class="fl">0.05</span>), <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span></span>
-<span id="cb15-14"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb15-14" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Volcano Plot of Differential Expression&quot;</span>,</span>
-<span id="cb15-15"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb15-15" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Log2 Fold Change&quot;</span>, <span class="at">y =</span> <span class="st">&quot;-Log10 Adjusted P-Value&quot;</span>) <span class="sc">+</span></span>
-<span id="cb15-16"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb15-16" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="rnaseq_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb14-2"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-2" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-3" tabindex="-1"></a><span class="co"># 🔹 Load saved DESeq2 results from CSV</span></span>
+<span id="cb14-4"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-4" tabindex="-1"></a>res_df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/deseq2_results.csv&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb14-5"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-5" tabindex="-1"></a>  <span class="fu">drop_na</span>(log2FoldChange, padj) <span class="sc">%&gt;%</span></span>
+<span id="cb14-6"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">significant =</span> padj <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> <span class="fu">abs</span>(log2FoldChange) <span class="sc">&gt;</span> <span class="dv">1</span>)</span>
+<span id="cb14-7"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-7" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-8" tabindex="-1"></a><span class="co"># 📊 Volcano plot</span></span>
+<span id="cb14-9"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-9" tabindex="-1"></a><span class="fu">ggplot</span>(res_df, <span class="fu">aes</span>(<span class="at">x =</span> log2FoldChange, <span class="at">y =</span> <span class="sc">-</span><span class="fu">log10</span>(padj), <span class="at">color =</span> significant)) <span class="sc">+</span></span>
+<span id="cb14-10"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-10" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb14-11"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-11" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;FALSE&quot;</span> <span class="ot">=</span> <span class="st">&quot;gray&quot;</span>, <span class="st">&quot;TRUE&quot;</span> <span class="ot">=</span> <span class="st">&quot;red&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb14-12"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-12" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span></span>
+<span id="cb14-13"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-13" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="sc">-</span><span class="fu">log10</span>(<span class="fl">0.05</span>), <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span></span>
+<span id="cb14-14"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-14" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Volcano Plot of Differential Expression&quot;</span>,</span>
+<span id="cb14-15"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-15" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Log2 Fold Change&quot;</span>, <span class="at">y =</span> <span class="st">&quot;-Log10 Adjusted P-Value&quot;</span>) <span class="sc">+</span></span>
+<span id="cb14-16"><a href="how-do-you-visualize-differentially-expressed-genes-with-a-volcano-plot.html#cb14-16" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<p><img src="rnaseq_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <blockquote>
 <p><strong>Takeaway</strong>: ✅ Volcano plots help visualize genes with both strong effect size and statistical significance, making it easier to prioritize candidates for downstream analysis or validation. Use clear thresholds (e.g., log2FC &gt; 1, padj &lt; 0.05) to highlight key hits</p>
 </blockquote>
@@ -288,7 +288,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="how-do-you-perform-pca-to-explore-sample-similarity.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="how-do-you-visualize-the-expression-of-a-single-gene-with-a-boxplot.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
@@ -320,7 +320,7 @@ gitbook.start({
     "size": 2
   },
   "edit": {
-    "link": "https://github.com/datainsights/cdi-rnaseq/edit/main/03-1-rnaseq.Rmd",
+    "link": "https://github.com/datainsights/cdi-rnaseq/edit/main/03-1-rnaseq-viz.Rmd",
     "text": "Edit"
   },
   "history": {
