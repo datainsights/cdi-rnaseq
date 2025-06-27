@@ -1,21 +1,56 @@
 # 📘 Domain-Specific R Packages for RNA-Seq Analysis and Transcriptomics
 
-# Ensure BiocManager is available (if needed)
-if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")
+# ────────────────────────────────────────────────────────────────
+# ✅ Ensure BiocManager is installed and loaded
+if (!requireNamespace("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
 library(BiocManager)
 
-# List of core packages for this domain
-domain_pkgs <- c("DESeq2", "edgeR", "tximport")
+# ✅ Ensure renv is available for isolated project package management
+if (!requireNamespace("renv", quietly = TRUE))
+  install.packages("renv")
+library(renv)
 
-for (pkg in domain_pkgs) {
+# ────────────────────────────────────────────────────────────────
+# 📦 Base RNA-Seq Domain Packages (core tools and dataset)
+base_rnaseq_pkgs <- c("DESeq2", "edgeR", "tximport", "airway")
+
+for (pkg in base_rnaseq_pkgs) {
   if (!requireNamespace(pkg, quietly = TRUE)) {
     renv::install(pkg, repos = BiocManager::repositories())
   }
 }
 
-# Optional GitHub-based package for this domain (if applicable)
+# Optional GitHub-based installs (custom methods or visualization add-ons)
+# Example:
 # if (!requireNamespace("somePackage", quietly = TRUE)) {
 #   renv::install("username/somePackage")
 # }
 
-message("✅ rnaseq-domain setup complete.")
+# ────────────────────────────────────────────────────────────────
+# 🧬 Extended RNA-Seq Toolkit (infrastructure, QC, annotation, visualization)
+extended_rnaseq_pkgs <- c(
+  # Differential expression and input
+  "limma",
+
+  # Infrastructure
+  "SummarizedExperiment", "GenomicRanges", "IRanges", "S4Vectors",
+  "Biobase", "BiocGenerics",
+
+  # Quality control and sequencing
+  "ShortRead", # FastQC is not an R package but is included for completeness
+
+  # Annotation and enrichment
+  "AnnotationDbi", "org.Hs.eg.db", "biomaRt", "clusterProfiler",
+
+  # Visualization and reporting
+  "ComplexHeatmap", "EnhancedVolcano", "iSEE"
+)
+
+for (pkg in extended_rnaseq_pkgs) {
+  if (!requireNamespace(pkg, quietly = TRUE)) {
+    BiocManager::install(pkg, ask = FALSE, update = FALSE)
+  }
+}
+
+message("✅ RNA-Seq domain package setup complete.")

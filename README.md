@@ -72,13 +72,16 @@ Place all input files inside the `data/` folder.
 
 ---
 
+> 🧠 You’ve learned the framework for free — now apply it to solve real-world, domain-specific problems.
+
+## 🤝 Contributors
+
+Maintained by the CDI Team at [ComplexDataInsights.com](https://complexdatainsights.com).  
+We welcome improvements, feedback, and collaboration!
+
+📬 See the [CDI Contribution Guide](https://github.com/datainsights/cdi-framework/blob/main/CONTRIBUTING.md) for how to get involved.
+
 ## 📄 License
 
-This guide is released under the [MIT License](LICENSE).  
-Attribution appreciated when used in educational or published works.
-
----
-
-## 🧠 Maintainers
-
-Created and maintained by the **CDI Team** at [ComplexDataInsights.com](https://complexdatainsights.com)
+This project is released under the [MIT License](LICENSE).  
+Attribution is appreciated in derivative works or training use.
