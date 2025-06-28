@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>🌱 Welcome to the RNA-Seq Q&amp;A Guide | rnaseq.knit</title>
+  <title>Q&A 1 How do you create a project data folder for storing RNA-Seq inputs and outputs? | rnaseq.knit</title>
   <meta name="description" content="🧬 RNA-Seq Data Science in R" />
   <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="🌱 Welcome to the RNA-Seq Q&amp;A Guide | rnaseq.knit" />
+  <meta property="og:title" content="Q&A 1 How do you create a project data folder for storing RNA-Seq inputs and outputs? | rnaseq.knit" />
   <meta property="og:type" content="book" />
   
   
   <meta name="github-repo" content="https://github.com/datainsights/cdi-rnaseq/" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="🌱 Welcome to the RNA-Seq Q&amp;A Guide | rnaseq.knit" />
+  <meta name="twitter:title" content="Q&A 1 How do you create a project data folder for storing RNA-Seq inputs and outputs? | rnaseq.knit" />
   
   
   
@@ -28,8 +28,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-<link rel="prev" href="index.html"/>
-<link rel="next" href="what-kind-of-data-will-you-be-using-in-this-guide.html"/>
+<link rel="prev" href="what-kind-of-data-will-you-be-using-in-this-guide.html"/>
+<link rel="next" href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -218,21 +218,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="welcome-to-the-rna-seq-qa-guide" class="section level1 unnumbered hasAnchor">
-<h1>🌱 Welcome to the RNA-Seq Q&amp;A Guide<a href="welcome-to-the-rna-seq-qa-guide.html#welcome-to-the-rna-seq-qa-guide" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This guide is your hands-on companion for learning and applying RNA sequencing (RNA-Seq) data analysis — one question at a time.</p>
-<p>You’ll explore each step of the RNA-Seq pipeline using real tools, reproducible workflows, and well-commented code. From quality control and quantification to differential expression and biological interpretation, this guide shows how scripting, statistics, and bioinformatics come together in practice.</p>
-<p>Whether you’re a student, researcher, or self-taught enthusiast, you’ll gain confidence using Python, R, shell scripting, and reproducible workflows — including tools like <strong>DESeq2</strong>, <strong>Salmon</strong>, <strong>edgeR</strong>, <strong>FastQC</strong>, <strong>Snakemake</strong>, and more.</p>
-<p>Each Q&amp;A includes a clear explanation, relevant code in both Python and R when applicable, and builds toward real-world problem solving. You’re not just learning RNA-Seq — you’re learning to think like a modern data-driven bioinformatician.</p>
-<hr />
+<div id="how-do-you-create-a-project-data-folder-for-storing-rna-seq-inputs-and-outputs" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">Q&A 1</span> How do you create a project data folder for storing RNA-Seq inputs and outputs?<a href="how-do-you-create-a-project-data-folder-for-storing-rna-seq-inputs-and-outputs.html#how-do-you-create-a-project-data-folder-for-storing-rna-seq-inputs-and-outputs" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="explanation" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Explanation<a href="how-do-you-create-a-project-data-folder-for-storing-rna-seq-inputs-and-outputs.html#explanation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A well-organized project structure improves reproducibility and clarity in RNA-Seq workflows. We’ll begin by creating a <code>data/</code> directory where all input files (counts, metadata) and output files (DE results, visualizations) will be stored.</p>
+<p>This setup mimics a real-world analysis structure and helps you track your data as you progress through the Q&amp;A guide.</p>
+</div>
+<div id="r-code" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> R Code<a href="how-do-you-create-a-project-data-folder-for-storing-rna-seq-inputs-and-outputs.html#r-code" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="how-do-you-create-a-project-data-folder-for-storing-rna-seq-inputs-and-outputs.html#cb1-1" tabindex="-1"></a><span class="co"># 📁 Create the data folder if it doesn&#39;t exist</span></span>
+<span id="cb1-2"><a href="how-do-you-create-a-project-data-folder-for-storing-rna-seq-inputs-and-outputs.html#cb1-2" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">dir.exists</span>(<span class="st">&quot;data&quot;</span>)) <span class="fu">dir.create</span>(<span class="st">&quot;data&quot;</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-3"><a href="how-do-you-create-a-project-data-folder-for-storing-rna-seq-inputs-and-outputs.html#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="how-do-you-create-a-project-data-folder-for-storing-rna-seq-inputs-and-outputs.html#cb1-4" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;✅ data/ folder created.&quot;</span>)</span></code></pre></div>
+<blockquote>
+<p>✅ <strong>Takeaway:</strong> Always start your RNA-Seq project by creating a consistent directory structure. A <code>data/</code> folder keeps inputs and outputs organized throughout your analysis.</p>
+</blockquote>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="what-kind-of-data-will-you-be-using-in-this-guide.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="what-kind-of-data-will-you-be-using-in-this-guide.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -263,7 +273,7 @@ gitbook.start({
     "size": 2
   },
   "edit": {
-    "link": "https://github.com/datainsights/cdi-rnaseq/edit/main/index.Rmd",
+    "link": "https://github.com/datainsights/cdi-rnaseq/edit/main/03-1-rnaseq.Rmd",
     "text": "Edit"
   },
   "history": {

@@ -8,8 +8,8 @@ language:
 
 rmd_files:
   - index.Rmd
-  - 03-0-getting-started.Rmd
-  - 03-0-rnaseq-deseq.Rmd
-  - 03-1-rnaseq-eda.Rmd
-  - 03-1-rnaseq-viz.Rmd
+  # - 03-0-getting-started.Rmd
+  # - 03-0-rnaseq-deseq.Rmd
+  - 03-1-rnaseq.Rmd
+  # - 03-1-rnaseq-viz.Rmd
 

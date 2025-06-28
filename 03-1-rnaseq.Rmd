@@ -1,450 +1,207 @@
-# (PART) COUNT EXPLORATION {-}
+# (PART) DATA PREPARATION {-}
 
-# How do you explore total read counts per sample before normalization?
+# How do you create a project data folder for storing RNA-Seq inputs and outputs?
 
 ## Explanation
 
-Before performing any normalization or downstream analysis, it's important to check the total read counts (library sizes) across all samples. This helps identify:
+A well-organized project structure improves reproducibility and clarity in RNA-Seq workflows. We’ll begin by creating a `data/` directory where all input files (counts, metadata) and output files (DE results, visualizations) will be stored.
 
-- ⚠️ Potential outliers or failed libraries
-- 📉 Low-coverage samples that might skew differential expression
-- 📊 Overall distribution differences across conditions
-
-By visualizing total counts per sample, we can assess whether further filtering or batch correction might be necessary.
-
-## Python Code
-
-
-
-
-```python
-import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
-
-# 🔹 Load data
-counts = pd.read_csv("data/demo_counts.csv", index_col=0)
-metadata = pd.read_csv("data/demo_metadata.csv")
-
-# 🔍 Compute total counts per sample
-total_counts = counts.sum(axis=0).reset_index()
-total_counts.columns = ["sample_name", "total_reads"]
-
-# 🔗 Merge with metadata
-plot_data = pd.merge(total_counts, metadata, on="sample_name")
-
-# 📊 Barplot
-plt.figure(figsize=(10, 5))
-sns.barplot(data=plot_data, x="sample_name", y="total_reads", hue="condition")
-plt.xticks(rotation=45, ha="right")
-plt.title("Total Read Counts per Sample")
-plt.tight_layout()
-plt.show()
-
-```
-
-
-    
-![](03-1-rnaseq_files/03-1-rnaseq_1_0.png)
-    
-
+This setup mimics a real-world analysis structure and helps you track your data as you progress through the Q&A guide.
 
 ## R Code
 ```{r}
-library(tidyverse)
+# 📁 Create the data folder if it doesn't exist
+if (!dir.exists("data")) dir.create("data", showWarnings = FALSE)
 
-# 🔹 Load data
-counts <- read_csv("data/demo_counts.csv") %>%
-  column_to_rownames("gene")
-metadata <- read_csv("data/demo_metadata.csv")
-
-# 🔍 Compute total counts per sample
-total_reads <- colSums(counts) %>%
-  enframe(name = "sample_name", value = "total_reads")
-
-# 🔗 Merge with metadata
-plot_data <- left_join(total_reads, metadata, by = "sample_name")
-
-# 📊 Barplot
-ggplot(plot_data, aes(x = sample_name, y = total_reads, fill = condition)) +
-  geom_col() +
-  labs(title = "Total Read Counts per Sample", y = "Total Reads", x = "Sample") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+message("✅ data/ folder created.")
 ```
 
-> ✅ **Takeaway:** Exploring total read counts helps detect inconsistencies early. Investigate samples with unusually low or high counts before trusting downstream results.
+> ✅ **Takeaway:** Always start your RNA-Seq project by creating a consistent directory structure. A `data/` folder keeps inputs and outputs organized throughout your analysis.
 
-# How do you log-transform RNA-Seq counts for PCA or clustering?
+# How do you generate synthetic RNA-Seq counts and metadata using R?
 
 ## Explanation
 
-Raw RNA-Seq counts are highly skewed and **heteroscedastic**—meaning the variance increases with expression. This makes them unsuitable for clustering, PCA, or heatmap generation because:
+In this step, we generate **synthetic RNA-Seq data** with known differences between conditions. This allows you to simulate differential expression, save the data into a `data/` folder, and later analyze it using DESeq2.
 
-- Counts are **not normally distributed**
-- **High-expression genes dominate** signal
-- **Variance is not stabilized**, which distorts distance-based methods
+We simulate:
 
-To address this, we apply a **log2 transformation**, such as:
+- 1000 genes
+- 14 samples (11 Positive, 3 Negative)
+- Upregulation in the top 30 genes for Negative samples  
+- Downregulation in the next 30 genes for Negative samples
 
-- `log2(count + 1)` – quick and interpretable
-- `rlog()` or `vst()` – DESeq2 methods that stabilize variance more robustly
-
-These transformations are essential to ensure that visualizations like **PCA plots**, **boxplots**, and **heatmaps** reflect meaningful biological structure rather than artifacts of scale or count depth.
-
-> 📌 **Reminder:** Transformation is a core step in RNA-Seq EDA—it unlocks the ability to "see" patterns clearly.
-
-## Python Code
-
-
-
-
-```python
-import pandas as pd
-import numpy as np
-import seaborn as sns
-import matplotlib.pyplot as plt
-
-# 🔹 Load and log-transform
-counts = pd.read_csv("data/demo_counts.csv", index_col=0)
-log_counts = np.log2(counts + 1)
-
-# 🔍 Preview a few genes
-
-log_counts.iloc[:5, :5]
-
-
-```
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Sample_01</th>
-      <th>Sample_02</th>
-      <th>Sample_03</th>
-      <th>Sample_04</th>
-      <th>Sample_05</th>
-    </tr>
-    <tr>
-      <th>gene</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>SEC24B-AS1</th>
-      <td>1.584963</td>
-      <td>3.169925</td>
-      <td>2.321928</td>
-      <td>2.807355</td>
-      <td>2.321928</td>
-    </tr>
-    <tr>
-      <th>A1BG</th>
-      <td>0.000000</td>
-      <td>1.000000</td>
-      <td>1.000000</td>
-      <td>2.584963</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>A1CF</th>
-      <td>3.807355</td>
-      <td>5.727920</td>
-      <td>5.930737</td>
-      <td>0.000000</td>
-      <td>5.727920</td>
-    </tr>
-    <tr>
-      <th>GGACT</th>
-      <td>2.807355</td>
-      <td>0.000000</td>
-      <td>1.000000</td>
-      <td>2.584963</td>
-      <td>2.584963</td>
-    </tr>
-    <tr>
-      <th>A2M</th>
-      <td>10.211888</td>
-      <td>10.824959</td>
-      <td>11.830515</td>
-      <td>11.050529</td>
-      <td>10.820977</td>
-    </tr>
-  </tbody>
-</table>
-</div>
+> 🔧 This setup mimics a real-world study design and ensures that the resulting **volcano and MA plots** clearly show the V-shape pattern of differential expression.
 
 
 
 ## R Code
+
 ```{r}
 library(tidyverse)
-library(DESeq2)
 
-# 🔹 Load and log-transform
-counts <- read_csv("data/demo_counts.csv") %>%
-  column_to_rownames("gene")
-metadata <- read_csv("data/demo_metadata.csv")
-
-# 🧬 Prepare DESeq2 object
-dds <- DESeqDataSetFromMatrix(countData = counts, colData = metadata, design = ~ condition)
-
-# 🔄 Apply regularized log transformation
-rlog_counts <- rlog(dds)
-
-# 🔍 Preview
-assay(rlog_counts)[1:5, 1:5]
-```
-
-> ✅ **Takeaway:** Always log-transform count data before applying distance-based methods like PCA or clustering. Use `rlog()` or `vst()` for more reliable results on small datasets.
-
-# How do you perform PCA to explore sample similarity?
-
-## Explanation
-
-Principal Component Analysis (PCA) is a standard technique to explore global sample differences based on gene expression patterns. In RNA-Seq, PCA is often applied **after log-transformation** (e.g., `log2(count + 1)`, `rlog()`, or `vst()`).
-
-It helps identify:
-
-- 🔍 Clusters of biologically similar samples
-- ⚠️ Potential outliers or mislabeled conditions
-- 📊 The amount of variance explained by key components
-
-## Python Code
-
-
-
-```python
-import pandas as pd
-import numpy as np
-import seaborn as sns
-import matplotlib.pyplot as plt
-from sklearn.decomposition import PCA
-
-# 🔄 Set seed for reproducibility
-np.random.seed(42)
-
-# 🔹 Load data
-counts = pd.read_csv("data/demo_counts.csv", index_col=0)
-metadata = pd.read_csv("data/demo_metadata.csv")
-log_counts = np.log2(counts + 1)
-
-# 🎯 PCA
-pca = PCA(n_components=2)
-pca_result = pca.fit_transform(log_counts.T)
-pca_df = pd.DataFrame(pca_result, columns=["PC1", "PC2"])
-pca_df["sample_name"] = log_counts.columns
-pca_df = pca_df.merge(metadata, on="sample_name")
-
-# 📊 Plot
-plt.figure(figsize=(6, 5))
-sns.scatterplot(data=pca_df, x="PC1", y="PC2", hue="condition", s=100)
-plt.title("PCA of Log-Transformed Counts")
-plt.xlabel(f"PC1 ({pca.explained_variance_ratio_[0]:.1%} variance)")
-plt.ylabel(f"PC2 ({pca.explained_variance_ratio_[1]:.1%} variance)")
-plt.tight_layout()
-plt.show()
-```
-
-
-    
-![](03-1-rnaseq_files/03-1-rnaseq_7_0.png)
-    
-
-
-## R Code
-```{r}
-library(tidyverse)
-library(DESeq2)
-library(ggplot2)
-
-# 🔄 Set seed for reproducibility
 set.seed(42)
 
-# 🔹 Load and transform
-counts <- read_csv("data/demo_counts.csv") %>%
-  column_to_rownames("gene")
-metadata <- read_csv("data/demo_metadata.csv")
+# 📦 Create output directory
+if (!dir.exists("data")) dir.create("data", recursive = TRUE)
 
-dds <- DESeqDataSetFromMatrix(countData = counts, colData = metadata, design = ~ condition)
-rlog_counts <- rlog(dds)
+# 🧬 Simulation settings
+n_genes <- 1000
+n_pos <- 11
+n_neg <- 3
+n_de_up <- 30
+n_de_down <- 30
+gene_ids <- paste0("Gene", seq_len(n_genes))
 
-# 🎯 PCA plot
-pca_data <- plotPCA(rlog_counts, intgroup = "condition", returnData = TRUE)
-percentVar <- round(100 * attr(pca_data, "percentVar"))
+# Simulate Positive group (baseline expression)
+counts_pos <- matrix(rnbinom(n_genes * n_pos, mu = 100, size = 1), nrow = n_genes)
 
-# 📊 Plot
-ggplot(pca_data, aes(PC1, PC2, color = condition)) +
-  geom_point(size = 3) +
-  labs(title = "PCA of RNA-Seq Samples",
-       x = paste0("PC1 (", percentVar[1], "%)"),
-       y = paste0("PC2 (", percentVar[2], "%)")) +
-  theme_minimal()
+# Simulate Negative group
+counts_neg <- matrix(rnbinom(n_genes * n_neg, mu = 100, size = 1), nrow = n_genes)
 
-# 👁️ Preview top 5x5 matrix
-assay(rlog_counts)[1:5, 1:5]
+# ⬆️ Upregulate top 30 genes in Negative samples
+counts_neg[1:n_de_up, ] <- counts_neg[1:n_de_up, ] + rnbinom(n_de_up * n_neg, mu = 400, size = 1)
+
+# ⬇️ Downregulate next 30 genes in Negative samples
+counts_neg[(n_de_up + 1):(n_de_up + n_de_down), ] <- rnbinom(n_de_down * n_neg, mu = 10, size = 1)
+
+# Combine counts
+count_matrix <- cbind(counts_pos, counts_neg)
+colnames(count_matrix) <- paste0("Sample", seq_len(n_pos + n_neg))
+rownames(count_matrix) <- gene_ids
+
+# 📄 Metadata
+metadata <- tibble(
+  Sample = colnames(count_matrix),
+  condition = c(rep("Positive", n_pos), rep("Negative", n_neg))
+)
+
+# 💾 Save to data/
+write_csv(as.data.frame(count_matrix) |> rownames_to_column("gene"), "data/demo_counts.csv")
+write_csv(metadata, "data/demo_metadata.csv")
+
+# 👁️ Preview first 5 genes × 5 samples
+as.data.frame(count_matrix)[1:5, 1:5]
+
+# 👁️ Preview metadata
+head(metadata, 5)
 ```
 
-> ✅ **Takeaway:** PCA helps you understand how samples cluster before any statistical testing. Always log-transform your data and set a seed for reproducibility.
+> ✅ Takeaway: This simulation creates a realistic expression pattern where some genes are clearly upregulated or downregulated in one condition. This structure is ideal for learning DE analysis, producing excellent MA and volcano plots, and testing downstream workflows.
 
-# (PART) DIFFERENTIAL GENE EXPRESSION {-}
-
-# How do you perform differential gene expression analysis using DESeq2?
+# How do you validate RNA-Seq input data before analysis using R?
 
 ## Explanation
 
-Once the count matrix and sample metadata are properly loaded and matched, we use **DESeq2** to identify genes that are significantly differentially expressed between experimental conditions.
+Before proceeding with differential expression analysis, it’s essential to confirm that your input files are loaded correctly and match in structure. This includes:
 
-DESeq2 performs a robust multi-step process:
+- ✅ Ensuring all samples in the metadata are present in the count matrix
+- ✅ Verifying that the matrix is numeric and genes are in rows
+- ✅ Checking for NA or non-finite values
 
-1. 📊 **Estimates size factors** to normalize for library depth  
-2. 🔁 **Calculates dispersion** for each gene to model biological variability  
-3. ⚙️ **Fits a negative binomial generalized linear model (GLM)** to the counts  
-4. 🧪 **Tests for significance** using the Wald test (or LRT if specified)  
-5. 📉 **Adjusts p-values** using False Discovery Rate (FDR) correction  
-
-The result is a table of genes with corresponding **log2 fold changes**, **p-values**, and **adjusted p-values**—ready for interpretation and visualization.
-
-## Python Code
-
-
-
-```python
-# NOTE: DESeq2 is R-based; in Python, use rpy2 or export counts and run DE in R
-# Placeholder: Python can handle visualization of DE results after exporting from R
-
-```
+This validation step prevents downstream errors and ensures a smooth analysis.
 
 ## R Code
-The code below is store in `scripts/res-df.R`
 
-```{R}
+```{r}
+library(tidyverse)
+
+# 🔄 Load the count matrix and metadata
+count_df <- read_csv("data/demo_counts.csv")
+metadata <- read_csv("data/demo_metadata.csv")
+
+# 🧪 Inspect the data
+glimpse(count_df)
+glimpse(metadata)
+
+# Check that all sample names in metadata are in counts
+all(metadata$Sample %in% colnames(count_df))  # Should return TRUE
+
+# Set gene names as rownames and confirm dimensions
+counts <- count_df |>
+  column_to_rownames("gene") |>
+  as.matrix()
+
+stopifnot(all(metadata$Sample %in% colnames(counts)))
+stopifnot(ncol(counts) == nrow(metadata))
+```
+
+> ✅ **Takeaway:** A quick check of structure, dimension, and sample consistency ensures your data is clean and ready for analysis. This step can help catch common mistakes early, such as misaligned sample names or non-numeric entries.
+
+# How do you perform differential gene expression analysis using DESeq2 in R?
+
+## Explanation
+
+With a validated count matrix and metadata, we can now run **DESeq2** to identify differentially expressed genes between two conditions.
+
+DESeq2 performs:
+
+1. 📊 Size factor estimation (normalization)
+2. 🔁 Dispersion estimation
+3. ⚙️ Negative binomial model fitting
+4. 🧪 Wald test for significance
+5. 📉 Adjusted p-values via FDR
+
+This produces a results table with log2 fold changes, p-values, and adjusted p-values.
+
+## R Code
+
+```{r}
 library(tidyverse)
 library(DESeq2)
 
-# 🔄 Set seed for reproducibility
-set.seed(42)
+set.seed(42)  # For reproducibility
 
-# 🔹 Load data
-counts <- read_csv("data/demo_counts.csv") %>%
-  column_to_rownames("gene")
+# 🔄 Load data
+count_df <- read_csv("data/demo_counts.csv")
 metadata <- read_csv("data/demo_metadata.csv")
 
-# 🧬 Create DESeq2 object
-dds <- DESeqDataSetFromMatrix(countData = counts,
-                              colData = metadata,
-                              design = ~ condition)
+# 🧬 Prepare DESeq2 inputs
+counts <- count_df |>
+  column_to_rownames("gene") |>
+  as.matrix()
 
-# ⚙️ Run DE analysis
+dds <- DESeqDataSetFromMatrix(
+  countData = counts,
+  colData = metadata,
+  design = ~ condition
+)
+
+# ⚙️ Run differential expression analysis
 dds <- DESeq(dds)
 
-# 📋 Extract results
-res <- results(dds)
-
-# 🧼 Clean results
-res_df <- as.data.frame(res) %>%
-  rownames_to_column("gene") %>%
+# 📋 Extract results and clean
+res_df <- as.data.frame(results(dds)) |>
+  rownames_to_column("gene") |>
+  drop_na(log2FoldChange, padj) |>
   arrange(padj)
 
-# 💾 Save for downstream visualization if not already saved
-if (!file.exists("data/deseq2_results.csv")) {
-  write_csv(res_df, "data/deseq2_results.csv")
-}
-
-# 👁️ Preview top results
-head(res_df, 5)
+# 💾 Save for downstream steps
+if (!dir.exists("data")) dir.create("data", recursive = TRUE)
+write_csv(res_df, "data/deseq2_results.csv")
 ```
 
-> ✅ **Takeaway:** DESeq2 provides robust statistical testing for identifying differentially expressed genes. Always inspect and sort results by adjusted p-value (`padj`) to focus on the most significant findings.
+> ✅ **Takeaway:** DESeq2 provides a robust statistical framework to identify significantly regulated genes. Once saved, these results can be used for downstream visualizations like volcano plots and MA plots.
 
-# How do you visualize differentially expressed genes with a volcano plot?
+# How do you create a volcano plot from DESeq2 results using R?
 
 ## Explanation
 
-A **volcano plot** combines both statistical significance and effect size in one visual:
+A **volcano plot** combines statistical significance with effect size to highlight genes of interest:
 
-- **X-axis**: log2 fold change (magnitude of expression difference)
-- **Y-axis**: -log10 adjusted p-value (significance)
-- Helps highlight genes that are both **statistically significant** and **strongly regulated**
-- Typically uses color to distinguish significant genes for quick interpretation
+- **X-axis**: log2 fold change (magnitude of differential expression)
+- **Y-axis**: -log10 adjusted p-value (statistical significance)
 
-## Python Code
-
-> ℹ️ Make sure the file `data/deseq2_results.csv` has already been saved by the (above) R code from the DESeq2 step.
-
-
-
-
-
-```python
-import pandas as pd
-import numpy as np
-import seaborn as sns
-import matplotlib.pyplot as plt
-
-# 🔹 Load DE results (exported from R)
-res_df = pd.read_csv("data/deseq2_results.csv")
-
-# 🧪 Add significance status
-res_df["significant"] = (res_df["padj"] < 0.05) & (abs(res_df["log2FoldChange"]) > 1)
-
-# 📊 Volcano plot
-plt.figure(figsize=(8, 6))
-sns.scatterplot(data=res_df,
-                x="log2FoldChange",
-                y=-np.log10(res_df["padj"]),
-                hue="significant",
-                palette={True: "red", False: "gray"},
-                alpha=0.7)
-plt.axhline(-np.log10(0.05), linestyle="--", color="black", linewidth=1)
-plt.axvline(x=-1, linestyle="--", color="black", linewidth=1)
-plt.axvline(x=1, linestyle="--", color="black", linewidth=1)
-plt.title("Volcano Plot of Differential Expression")
-plt.xlabel("Log2 Fold Change")
-plt.ylabel("-Log10 Adjusted P-Value")
-plt.legend(title="Significant")
-plt.tight_layout()
-plt.show()
-
-
-```
-
-
-    
-![](03-1-rnaseq_files/03-1-rnaseq_13_0.png)
-    
-
+It’s ideal for identifying genes that are both **strongly regulated** and **highly significant**. DESeq2 results already contain `log2FoldChange` and `padj` columns, making this visualization straightforward.
 
 ## R Code
+
 ```{r}
 library(tidyverse)
 
-# 🔹 Load saved DESeq2 results from CSV
-res_df <- read_csv("data/deseq2_results.csv") %>%
-  drop_na(log2FoldChange, padj) %>%
+# 📄 Load DESeq2 results
+res_df <- read_csv("data/deseq2_results.csv") |>
+  drop_na(log2FoldChange, padj) |>
   mutate(significant = padj < 0.05 & abs(log2FoldChange) > 1)
 
 # 📊 Volcano plot
@@ -458,189 +215,293 @@ ggplot(res_df, aes(x = log2FoldChange, y = -log10(padj), color = significant)) +
   theme_minimal()
 ```
 
-> **Takeaway**: ✅ Volcano plots help visualize genes with both strong effect size and statistical significance, making it easier to prioritize candidates for downstream analysis or validation. Use clear thresholds (e.g., log2FC > 1, padj < 0.05) to highlight key hits
+> ✅ **Takeaway:** Volcano plots help you visually prioritize genes for downstream validation by showing both statistical significance and magnitude of change.
 
-# How do you visualize the expression of a single gene with a boxplot?
+# How do you create an MA plot from DESeq2 results using R?
 
 ## Explanation
 
-Once differential expression is complete, it's common to visualize individual genes of interest. A **boxplot** shows how expression levels vary across conditions.
+An **MA plot** shows the relationship between:
 
-To make this plot:
-- Use **log-transformed counts** (e.g., from `rlog()` or `log2(count + 1)`)
-- Select one gene of interest from the DE results
-- Combine expression values with sample metadata
+- **M (log ratio)** = log2 fold change (Y-axis)  
+- **A (mean average)** = average expression (X-axis), often `baseMean`
 
-## Python Code
+It helps you visualize:
 
+- Genes with **large fold changes**
+- Genes with **low expression and unstable variance**
+- Potential **systematic bias** in your differential expression results
 
+MA plots are especially useful after running DESeq2, as the result object includes `baseMean` and `log2FoldChange`.
 
-
-```python
-import pandas as pd
-import numpy as np
-import seaborn as sns
-import matplotlib.pyplot as plt
-
-# 🔹 Load and prepare data
-log_counts = np.log2(pd.read_csv("data/demo_counts.csv", index_col=0) + 1)
-metadata = pd.read_csv("data/demo_metadata.csv")
-gene_to_plot = "A2M"
-
-# 🔍 Check if gene exists
-if gene_to_plot not in log_counts.index:
-    raise ValueError(f"{gene_to_plot} not found in count matrix.")
-
-# 🧬 Prepare long-form dataframe
-df_plot = pd.DataFrame({
-    "expression": log_counts.loc[gene_to_plot],
-    "sample_name": log_counts.columns
-}).merge(metadata, on="sample_name")
-
-# 📦 Boxplot
-plt.figure(figsize=(5, 4))
-sns.boxplot(data=df_plot, x="condition", y="expression", palette="Set2")
-sns.stripplot(data=df_plot, x="condition", y="expression", color="black", alpha=0.6)
-plt.title(f"Expression of {gene_to_plot}")
-plt.ylabel("Log2 Expression")
-plt.tight_layout()
-plt.show()
-
-```
-
-    /var/folders/m1/0dxpqygn2ds41kxkjgwtftr00000gn/T/ipykernel_41833/1503619118.py:23: FutureWarning: 
-    
-    Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
-    
-      sns.boxplot(data=df_plot, x="condition", y="expression", palette="Set2")
-
-
-
-    
-![](03-1-rnaseq_files/03-1-rnaseq_16_1.png)
-    
 
 
 ## R Code
+
+```{r}
+library(tidyverse)
+
+# 📄 Load DESeq2 results
+res_df <- read_csv("data/deseq2_results.csv") |>
+  drop_na(log2FoldChange, padj, baseMean)
+
+# 📊 MA plot
+ggplot(res_df, aes(x = log10(baseMean + 1), y = log2FoldChange)) +
+  geom_point(alpha = 0.6, color = "steelblue", size = 2) +
+  geom_hline(yintercept = c(-1, 1), linetype = "dashed", color = "darkgray") +
+  labs(title = "MA Plot of Differential Expression",
+       x = "Log10 Mean Expression (baseMean + 1)",
+       y = "Log2 Fold Change") +
+  theme_minimal()
+```
+
+> ✅ **Takeaway:** MA plots offer a quick summary of how expression changes relate to average gene abundance, helping detect outliers and trends in your DE analysis.
+
+# How do you log-transform RNA-Seq counts for PCA or clustering using R?
+
+## Explanation
+
+Raw RNA-Seq counts are:
+
+- Not normally distributed  
+- Heteroscedastic (variance increases with mean)  
+- Influenced by a few highly expressed genes  
+
+These properties make them unsuitable for **PCA**, **clustering**, or **heatmaps** without transformation.
+
+To correct this, we apply a **log transformation** to stabilize variance:
+
+- `log2(count + 1)` — simple and fast
+- `rlog()` — regularized log transformation (DESeq2), ideal for small sample sizes
+- `vst()` — variance-stabilizing transformation, faster for large datasets
+
+We save the rlog matrix so it can be reused by downstream visualizations.
+
+
+
+## R Code
+
 ```{r}
 library(tidyverse)
 library(DESeq2)
 
-# 🔄 Set seed for reproducibility
-set.seed(42)
+# 📊 Load count data and metadata
+counts <- read_csv("data/demo_counts.csv") |>
+  column_to_rownames("gene") |>
+  as.matrix()
 
-# 🔹 Load and transform
-counts <- read_csv("data/demo_counts.csv") %>%
-  column_to_rownames("gene")
 metadata <- read_csv("data/demo_metadata.csv")
 
+# 📦 Create DESeq2 object
 dds <- DESeqDataSetFromMatrix(countData = counts,
                               colData = metadata,
                               design = ~ condition)
-rlog_counts <- rlog(dds)
 
-# 🔍 Gene to plot
-gene_to_plot <- "A2M"
-if (!gene_to_plot %in% rownames(rlog_counts)) stop("Gene not found.")
+# 🔄 Transform
+rlog_dds <- rlog(dds)
 
-# 📦 Prepare dataframe
-plot_data <- data.frame(
-  expression = assay(rlog_counts)[gene_to_plot, ],
-  sample_name = colnames(rlog_counts)
-) %>%
-  left_join(metadata, by = "sample_name")
+# 🧬 Extract transformed matrix
+rlog_mat <- assay(rlog_dds) |>
+  as.data.frame() |>
+  rownames_to_column("gene")
 
-# 📊 Boxplot
-ggplot(plot_data, aes(x = condition, y = expression)) +
-  geom_boxplot(fill = "skyblue", alpha = 0.6) +
-  geom_jitter(width = 0.1) +
-  labs(title = paste("Expression of", gene_to_plot),
-       y = "Log2 Expression") +
-  theme_minimal()
+# 💾 Save for reuse
+write_csv(rlog_mat, "data/rlog_matrix.csv")
 ```
 
-> ✅ **Takeaway:** Use boxplots to clearly visualize how expression of a specific gene differs between conditions. Combine with DE results to validate biological interpretation.
+> ✅ **Takeaway:** Log transformations—especially `rlog()`—stabilize variance and prepare RNA-Seq data for PCA, clustering, and heatmaps. Saving the transformed matrix improves reproducibility.
 
-# How do you summarize expression changes with an MA plot?
+# How do you create a heatmap of top differentially expressed genes using R?
 
 ## Explanation
 
-An **MA plot** (short for **Minus vs. Average plot**) displays the relationship between:
+A **heatmap** allows you to visualize the expression patterns of the most differentially expressed genes across all samples. It is especially helpful for:
 
-- **M (log ratio)** = log2 fold change (Y-axis), showing the difference in expression between conditions  
-- **A (mean average)** = average expression across all samples (X-axis), typically on a log scale
+- Revealing sample clustering and gene expression trends
+- Highlighting contrasts between conditions
+- Identifying outlier samples or expression signatures
 
-This visualization helps identify:
-
-- ✳️ Genes with **large fold changes**
-- ⚠️ Low-abundance genes with unstable variance
-- 🔍 Systematic biases or asymmetries in the DE results
-
-It’s especially useful after running DESeq2, as the result object already contains both `baseMean` (A) and `log2FoldChange` (M).
-
-
-## Python Code
-
-> ℹ️ Make sure `data/deseq2_results.csv` is available, saved from the R step.
-
-
-
-
-
-```python
-import pandas as pd
-import numpy as np
-import seaborn as sns
-import matplotlib.pyplot as plt
-
-# 🔹 Load DE results
-res_df = pd.read_csv("data/deseq2_results.csv")
-
-# 🧪 Add significance flag
-res_df["significant"] = (res_df["padj"] < 0.05) & (abs(res_df["log2FoldChange"]) > 1)
-
-# 📊 MA plot
-plt.figure(figsize=(8, 6))
-sns.scatterplot(data=res_df,
-                x=np.log10(res_df["baseMean"] + 1),
-                y=res_df["log2FoldChange"],
-                hue="significant",
-                palette={True: "red", False: "gray"},
-                alpha=0.6)
-plt.axhline(0, linestyle="--", color="black")
-plt.title("MA Plot of Differential Expression")
-plt.xlabel("Log10 Mean Expression (baseMean)")
-plt.ylabel("Log2 Fold Change")
-plt.legend(title="Significant")
-plt.tight_layout()
-plt.show()
-
-```
-
-
-    
-![](03-1-rnaseq_files/03-1-rnaseq_19_0.png)
-    
-
+We typically use **rlog-transformed data** to ensure that variance is stabilized, making expression patterns more interpretable.
 
 ## R Code
+
+```{r}
+library(tidyverse)
+library(pheatmap)
+
+# 🔹 Load transformed expression matrix
+rlog_mat <- read_csv("data/rlog_matrix.csv") |>
+  column_to_rownames("gene") |>
+  as.matrix()
+
+# 🔹 Load DESeq2 results and select top 30 DE genes
+res_df <- read_csv("data/deseq2_results.csv") |>
+  drop_na(padj) |>
+  arrange(padj)
+
+top_genes <- res_df$gene[1:30]
+top_mat <- rlog_mat[top_genes, ]
+
+# 📊 Plot heatmap
+pheatmap(top_mat,
+         cluster_rows = TRUE,
+         cluster_cols = TRUE,
+         show_rownames = TRUE,
+         fontsize_row = 6,
+         scale = "row",
+         main = "Heatmap of Top 30 Differentially Expressed Genes")
+```
+
+> ✅ **Takeaway:** Heatmaps are powerful tools to explore gene expression dynamics across conditions. Always use a variance-stabilized matrix and select top DE genes for clarity.
+
+# How do you visualize RNA-Seq samples using PCA in R?
+
+## Explanation
+
+**Principal Component Analysis (PCA)** reduces the dimensionality of high-throughput data like RNA-Seq by finding the principal directions of variation. PCA is useful for:
+
+- Detecting **sample outliers**
+- Checking for **batch effects**
+- Visualizing **group separation**
+
+We apply PCA on the rlog-transformed data (`rlog_matrix.csv`) to ensure homoscedasticity and interpretability.
+
+## R Code
+
 ```{r}
 library(tidyverse)
 
-# 🔹 Load DE results saved during initial processing
-res_df <- read_csv("data/deseq2_results.csv") %>%
-  drop_na(log2FoldChange, padj) %>%
-  mutate(significant = padj < 0.05 & abs(log2FoldChange) > 1)
+# 📥 Load rlog-transformed matrix
+rlog_mat <- read_csv("data/rlog_matrix.csv")
 
-# 📊 Volcano plot
-ggplot(res_df, aes(x = log2FoldChange, y = -log10(padj), color = significant)) +
-  geom_point(alpha = 0.6, size = 2) +
-  scale_color_manual(values = c("FALSE" = "gray", "TRUE" = "red")) +
-  geom_vline(xintercept = c(-1, 1), linetype = "dashed") +
-  geom_hline(yintercept = -log10(0.05), linetype = "dashed") +
-  labs(title = "Volcano Plot of Differential Expression",
-       x = "Log2 Fold Change", y = "-Log10 Adjusted P-Value") +
+# 🧪 Prepare PCA input
+pca_input <- rlog_mat |>
+  column_to_rownames("gene") |>
+  t() |>
+  as.data.frame()
+
+# 📊 Run PCA
+pca_res <- prcomp(pca_input, center = TRUE, scale. = TRUE)
+pca_df <- as_tibble(pca_res$x) |>
+  mutate(Sample = rownames(pca_input))
+
+# 🔗 Join with metadata
+metadata <- read_csv("data/demo_metadata.csv")
+plot_df <- left_join(pca_df, metadata, by = "Sample")
+
+# 🎨 Plot
+ggplot(plot_df, aes(x = PC1, y = PC2, color = condition)) +
+  geom_point(size = 3, alpha = 0.8) +
+  labs(title = "PCA of RNA-Seq Samples",
+       x = paste0("PC1 (", round(summary(pca_res)$importance[2, 1] * 100, 1), "%)"),
+       y = paste0("PC2 (", round(summary(pca_res)$importance[2, 2] * 100, 1), "%)")) +
   theme_minimal()
 ```
 
-> ✅ **Takeaway:** MA plots reveal expression trends across the full dynamic range of genes. Use them to verify if your DE analysis is symmetric and highlight low-abundance noise.
+> ✅ **Takeaway:** PCA on log-transformed RNA-Seq data helps visualize sample similarities, spot outliers, and confirm that experimental conditions drive the major sources of variation.
+
+# How do you visualize the expression of a single gene across conditions using R?
+
+## Explanation
+
+To explore how a specific gene behaves across experimental conditions, a **boxplot** of rlog-transformed expression values can provide insight into group differences and variability.
+
+This is useful for:
+
+- Validating top hits from DE results  
+- Highlighting genes of interest  
+- Creating publication-ready visual summaries
+
+We’ll visualize **Gene5** as an example.
+
+## R Code
+
+
+
+```{r}
+library(tidyverse)
+
+# 📥 Load rlog-transformed expression matrix
+# 📥 Load rlog-transformed expression matrix
+rlog_mat <- read_csv("data/rlog_matrix.csv") |>
+  column_to_rownames("gene") |>
+  as.matrix()
+
+# 📥 Load metadata
+metadata <- read_csv("data/demo_metadata.csv")
+
+# 🎯 Select one gene
+gene_to_plot <- "Gene5"
+
+# 🧪 Check gene exists
+if (!gene_to_plot %in% rownames(rlog_mat)) stop("Gene not found in rlog matrix.")
+
+# 🧾 Create dataframe for plotting
+plot_df <- tibble(
+  Expression = rlog_mat[gene_to_plot, ],
+  Sample = colnames(rlog_mat)
+) |>
+  left_join(metadata, by = "Sample")
+
+# 📊 Boxplot
+ggplot(plot_df, aes(x = condition, y = Expression, fill = condition)) +
+  geom_boxplot(width = 0.5, alpha = 0.7, outlier.shape = NA) +
+  geom_jitter(width = 0.1, size = 2, alpha = 0.7) +
+  labs(title = paste("Expression of", gene_to_plot),
+       x = "Condition", y = "Rlog Expression") +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+> ✅ **Takeaway:** Boxplots of individual genes help confirm biological patterns and support gene selection for follow-up experiments or reporting.
+
+# How do you visualize the expression of two or more genes across conditions using R?
+
+## Explanation
+
+Sometimes, you want to inspect the expression patterns of specific genes of interest — such as those that appear highly upregulated or downregulated in your DESeq2 results.
+
+By selecting two or more genes and reshaping the rlog-transformed matrix into a **tidy long format**, you can easily create grouped boxplots, violin plots, or faceted charts. These plots help validate patterns visually and are useful for presentations or downstream interpretation.
+
+## R Code
+
+
+
+```{r}
+library(tidyverse)
+
+# 📥 Load transformed matrix and metadata
+rlog_mat <- read_csv("data/rlog_matrix.csv") |>
+  column_to_rownames("gene") |>
+  as.matrix()
+
+metadata <- read_csv("data/demo_metadata.csv")
+
+# 🎯 Select two genes
+genes_to_plot <- c("Gene5", "Gene12")
+
+# ✅ Check genes exist
+missing_genes <- setdiff(genes_to_plot, rownames(rlog_mat))
+if (length(missing_genes) > 0) stop(paste("Missing genes:", paste(missing_genes, collapse = ", ")))
+
+# 🧾 Create tidy dataframe for ggplot
+plot_df <- rlog_mat[genes_to_plot, ] |>
+  as.data.frame() |>
+  rownames_to_column("gene") |>
+  pivot_longer(-gene, names_to = "Sample", values_to = "Expression") |>
+  left_join(metadata, by = "Sample")
+
+# 📊 Boxplot with multiple genes
+ggplot(plot_df, aes(x = condition, y = Expression, fill = condition)) +
+  geom_boxplot(width = 0.5, alpha = 0.7, outlier.shape = NA) +
+  geom_jitter(width = 0.2, size = 1.5, alpha = 0.6) +
+  facet_wrap(~gene, scales = "free_y") +
+  labs(title = "Expression of Selected Genes",
+       x = "Condition", y = "Rlog Expression") +
+  theme_bw() +
+  theme(legend.position = "none")
+```
+
+
+> ✅ **Takeaway:** Visualizing individual gene expression helps verify and communicate biological differences.  
+> 📌 This approach uses `facet_wrap()` to display each gene’s distribution across conditions in its own panel, making it easy to compare across genes and conditions.

@@ -1,6 +1,6 @@
 ---
 title: |
-  | 🧬 RNA-Seq Data Science
+  | 🧬 RNA-Seq Data Science in R
 subtitle: |
   | ![](images/cdi-rnaseq-cover.png){width=75%}  
   | Last updated: `r format(Sys.Date(), "%B %d, %Y")` 
@@ -37,6 +37,8 @@ favicon: "favicon.ico"
 
 #  {-}
 
+# (PART) PREFACE {-}
+
 # 🌱 Welcome to the RNA-Seq Q&A Guide {-}
 
 This guide is your hands-on companion for learning and applying RNA sequencing (RNA-Seq) data analysis — one question at a time.
@@ -46,3 +48,17 @@ You'll explore each step of the RNA-Seq pipeline using real tools, reproducible 
 Whether you’re a student, researcher, or self-taught enthusiast, you’ll gain confidence using Python, R, shell scripting, and reproducible workflows — including tools like **DESeq2**, **Salmon**, **edgeR**, **FastQC**, **Snakemake**, and more.
 
 Each Q&A includes a clear explanation, relevant code in both Python and R when applicable, and builds toward real-world problem solving. You're not just learning RNA-Seq — you're learning to think like a modern data-driven bioinformatician.
+
+---
+
+# 📂 What kind of data will you be using in this guide? {-}
+
+This guide uses **realistic synthetic RNA-Seq data** that mimics biological experiments with two conditions (e.g., *Positive* vs. *Negative*). The dataset includes:
+
+- 🧬 A **gene expression count matrix** with 1000 genes and 14 samples  
+- 📑 A **sample metadata file** defining experimental groups  
+- 📈 Precomputed **differential expression results** using DESeq2
+
+The synthetic design allows full control over expression patterns while producing biologically meaningful visualizations like PCA, volcano plots, MA plots, and heatmaps. It’s perfect for reproducible learning — no downloads or cloud access required.
+
+> ✅ Once you've mastered the methods here, you’ll be ready to plug in your own raw or processed RNA-Seq data and apply the same analysis flow confidently.
