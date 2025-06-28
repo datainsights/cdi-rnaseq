@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>🌱 Welcome to the RNA-Seq Q&amp;A Guide | rnaseq.knit</title>
+  <title>Q&A 7 How do you log-transform RNA-Seq counts for PCA or clustering using R? | rnaseq.knit</title>
   <meta name="description" content="🧬 RNA-Seq Data Science in R" />
   <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="🌱 Welcome to the RNA-Seq Q&amp;A Guide | rnaseq.knit" />
+  <meta property="og:title" content="Q&A 7 How do you log-transform RNA-Seq counts for PCA or clustering using R? | rnaseq.knit" />
   <meta property="og:type" content="book" />
   
   
   <meta name="github-repo" content="https://github.com/datainsights/cdi-rnaseq/" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="🌱 Welcome to the RNA-Seq Q&amp;A Guide | rnaseq.knit" />
+  <meta name="twitter:title" content="Q&A 7 How do you log-transform RNA-Seq counts for PCA or clustering using R? | rnaseq.knit" />
   
   
   
@@ -28,8 +28,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-<link rel="prev" href="index.html"/>
-<link rel="next" href="what-kind-of-data-will-you-be-using-in-this-guide.html"/>
+<link rel="prev" href="how-do-you-create-an-ma-plot-from-deseq2-results-using-r.html"/>
+<link rel="next" href="how-do-you-create-a-heatmap-of-top-differentially-expressed-genes-using-r.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -218,21 +218,66 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="welcome-to-the-rna-seq-qa-guide" class="section level1 unnumbered hasAnchor">
-<h1>🌱 Welcome to the RNA-Seq Q&amp;A Guide<a href="welcome-to-the-rna-seq-qa-guide.html#welcome-to-the-rna-seq-qa-guide" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This guide is your hands-on companion for learning and applying RNA sequencing (RNA-Seq) data analysis — one question at a time.</p>
-<p>You’ll explore each step of the RNA-Seq pipeline using real tools, reproducible workflows, and well-commented code. From quality control and quantification to differential expression and biological interpretation, this guide shows how scripting, statistics, and bioinformatics come together in practice.</p>
-<p>Whether you’re a student, researcher, or self-taught enthusiast, you’ll gain confidence using Python, R, shell scripting, and reproducible workflows — including tools like <strong>DESeq2</strong>, <strong>Salmon</strong>, <strong>edgeR</strong>, <strong>FastQC</strong>, <strong>Snakemake</strong>, and more.</p>
-<p>Each Q&amp;A includes a clear explanation, relevant code in both Python and R when applicable, and builds toward real-world problem solving. You’re not just learning RNA-Seq — you’re learning to think like a modern data-driven bioinformatician.</p>
-<hr />
+<div id="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering-using-r" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">Q&A 7</span> How do you log-transform RNA-Seq counts for PCA or clustering using R?<a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering-using-r.html#how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering-using-r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="explanation-6" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Explanation<a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering-using-r.html#explanation-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Raw RNA-Seq counts are:</p>
+<ul>
+<li>Not normally distributed<br />
+</li>
+<li>Heteroscedastic (variance increases with mean)<br />
+</li>
+<li>Influenced by a few highly expressed genes</li>
+</ul>
+<p>These properties make them unsuitable for <strong>PCA</strong>, <strong>clustering</strong>, or <strong>heatmaps</strong> without transformation.</p>
+<p>To correct this, we apply a <strong>log transformation</strong> to stabilize variance:</p>
+<ul>
+<li><code>log2(count + 1)</code> — simple and fast</li>
+<li><code>rlog()</code> — regularized log transformation (DESeq2), ideal for small sample sizes</li>
+<li><code>vst()</code> — variance-stabilizing transformation, faster for large datasets</li>
+</ul>
+<p>We save the rlog matrix so it can be reused by downstream visualizations.</p>
+</div>
+<div id="r-code-6" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> R Code<a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering-using-r.html#r-code-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering-using-r.html#cb16-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb16-2"><a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering-using-r.html#cb16-2" tabindex="-1"></a><span class="fu">library</span>(DESeq2)</span>
+<span id="cb16-3"><a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering-using-r.html#cb16-3" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering-using-r.html#cb16-4" tabindex="-1"></a><span class="co"># 📊 Load count data and metadata</span></span>
+<span id="cb16-5"><a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering-using-r.html#cb16-5" tabindex="-1"></a>counts <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/demo_counts.csv&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb16-6"><a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering-using-r.html#cb16-6" tabindex="-1"></a>  <span class="fu">column_to_rownames</span>(<span class="st">&quot;gene&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb16-7"><a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering-using-r.html#cb16-7" tabindex="-1"></a>  <span class="fu">as.matrix</span>()</span>
+<span id="cb16-8"><a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering-using-r.html#cb16-8" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering-using-r.html#cb16-9" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/demo_metadata.csv&quot;</span>)</span>
+<span id="cb16-10"><a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering-using-r.html#cb16-10" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering-using-r.html#cb16-11" tabindex="-1"></a><span class="co"># 📦 Create DESeq2 object</span></span>
+<span id="cb16-12"><a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering-using-r.html#cb16-12" tabindex="-1"></a>dds <span class="ot">&lt;-</span> <span class="fu">DESeqDataSetFromMatrix</span>(<span class="at">countData =</span> counts,</span>
+<span id="cb16-13"><a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering-using-r.html#cb16-13" tabindex="-1"></a>                              <span class="at">colData =</span> metadata,</span>
+<span id="cb16-14"><a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering-using-r.html#cb16-14" tabindex="-1"></a>                              <span class="at">design =</span> <span class="sc">~</span> condition)</span>
+<span id="cb16-15"><a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering-using-r.html#cb16-15" tabindex="-1"></a></span>
+<span id="cb16-16"><a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering-using-r.html#cb16-16" tabindex="-1"></a><span class="co"># 🔄 Transform</span></span>
+<span id="cb16-17"><a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering-using-r.html#cb16-17" tabindex="-1"></a>rlog_dds <span class="ot">&lt;-</span> <span class="fu">rlog</span>(dds)</span>
+<span id="cb16-18"><a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering-using-r.html#cb16-18" tabindex="-1"></a></span>
+<span id="cb16-19"><a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering-using-r.html#cb16-19" tabindex="-1"></a><span class="co"># 🧬 Extract transformed matrix</span></span>
+<span id="cb16-20"><a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering-using-r.html#cb16-20" tabindex="-1"></a>rlog_mat <span class="ot">&lt;-</span> <span class="fu">assay</span>(rlog_dds) <span class="sc">|&gt;</span></span>
+<span id="cb16-21"><a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering-using-r.html#cb16-21" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">|&gt;</span></span>
+<span id="cb16-22"><a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering-using-r.html#cb16-22" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>(<span class="st">&quot;gene&quot;</span>)</span>
+<span id="cb16-23"><a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering-using-r.html#cb16-23" tabindex="-1"></a></span>
+<span id="cb16-24"><a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering-using-r.html#cb16-24" tabindex="-1"></a><span class="co"># 💾 Save for reuse</span></span>
+<span id="cb16-25"><a href="how-do-you-log-transform-rna-seq-counts-for-pca-or-clustering-using-r.html#cb16-25" tabindex="-1"></a><span class="fu">write_csv</span>(rlog_mat, <span class="st">&quot;data/rlog_matrix.csv&quot;</span>)</span></code></pre></div>
+<blockquote>
+<p>✅ <strong>Takeaway:</strong> Log transformations—especially <code>rlog()</code>—stabilize variance and prepare RNA-Seq data for PCA, clustering, and heatmaps. Saving the transformed matrix improves reproducibility.</p>
+</blockquote>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="what-kind-of-data-will-you-be-using-in-this-guide.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="how-do-you-create-an-ma-plot-from-deseq2-results-using-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="how-do-you-create-a-heatmap-of-top-differentially-expressed-genes-using-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -263,7 +308,7 @@ gitbook.start({
     "size": 2
   },
   "edit": {
-    "link": "https://github.com/datainsights/cdi-rnaseq/edit/main/index.Rmd",
+    "link": "https://github.com/datainsights/cdi-rnaseq/edit/main/03-1-rnaseq.Rmd",
     "text": "Edit"
   },
   "history": {

@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>🌱 Welcome to the RNA-Seq Q&amp;A Guide | rnaseq.knit</title>
+  <title>Q&A 4 How do you perform differential gene expression analysis using DESeq2 in R? | rnaseq.knit</title>
   <meta name="description" content="🧬 RNA-Seq Data Science in R" />
   <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="🌱 Welcome to the RNA-Seq Q&amp;A Guide | rnaseq.knit" />
+  <meta property="og:title" content="Q&A 4 How do you perform differential gene expression analysis using DESeq2 in R? | rnaseq.knit" />
   <meta property="og:type" content="book" />
   
   
   <meta name="github-repo" content="https://github.com/datainsights/cdi-rnaseq/" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="🌱 Welcome to the RNA-Seq Q&amp;A Guide | rnaseq.knit" />
+  <meta name="twitter:title" content="Q&A 4 How do you perform differential gene expression analysis using DESeq2 in R? | rnaseq.knit" />
   
   
   
@@ -28,8 +28,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-<link rel="prev" href="index.html"/>
-<link rel="next" href="what-kind-of-data-will-you-be-using-in-this-guide.html"/>
+<link rel="prev" href="how-do-you-validate-rna-seq-input-data-before-analysis-using-r.html"/>
+<link rel="next" href="how-do-you-create-a-volcano-plot-from-deseq2-results-using-r.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -218,21 +218,67 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="welcome-to-the-rna-seq-qa-guide" class="section level1 unnumbered hasAnchor">
-<h1>🌱 Welcome to the RNA-Seq Q&amp;A Guide<a href="welcome-to-the-rna-seq-qa-guide.html#welcome-to-the-rna-seq-qa-guide" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This guide is your hands-on companion for learning and applying RNA sequencing (RNA-Seq) data analysis — one question at a time.</p>
-<p>You’ll explore each step of the RNA-Seq pipeline using real tools, reproducible workflows, and well-commented code. From quality control and quantification to differential expression and biological interpretation, this guide shows how scripting, statistics, and bioinformatics come together in practice.</p>
-<p>Whether you’re a student, researcher, or self-taught enthusiast, you’ll gain confidence using Python, R, shell scripting, and reproducible workflows — including tools like <strong>DESeq2</strong>, <strong>Salmon</strong>, <strong>edgeR</strong>, <strong>FastQC</strong>, <strong>Snakemake</strong>, and more.</p>
-<p>Each Q&amp;A includes a clear explanation, relevant code in both Python and R when applicable, and builds toward real-world problem solving. You’re not just learning RNA-Seq — you’re learning to think like a modern data-driven bioinformatician.</p>
-<hr />
+<div id="how-do-you-perform-differential-gene-expression-analysis-using-deseq2-in-r" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Q&A 4</span> How do you perform differential gene expression analysis using DESeq2 in R?<a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2-in-r.html#how-do-you-perform-differential-gene-expression-analysis-using-deseq2-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="explanation-3" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Explanation<a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2-in-r.html#explanation-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>With a validated count matrix and metadata, we can now run <strong>DESeq2</strong> to identify differentially expressed genes between two conditions.</p>
+<p>DESeq2 performs:</p>
+<ol style="list-style-type: decimal">
+<li>📊 Size factor estimation (normalization)</li>
+<li>🔁 Dispersion estimation</li>
+<li>⚙️ Negative binomial model fitting</li>
+<li>🧪 Wald test for significance</li>
+<li>📉 Adjusted p-values via FDR</li>
+</ol>
+<p>This produces a results table with log2 fold changes, p-values, and adjusted p-values.</p>
+</div>
+<div id="r-code-3" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> R Code<a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2-in-r.html#r-code-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2-in-r.html#cb13-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb13-2"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2-in-r.html#cb13-2" tabindex="-1"></a><span class="fu">library</span>(DESeq2)</span>
+<span id="cb13-3"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2-in-r.html#cb13-3" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2-in-r.html#cb13-4" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)  <span class="co"># For reproducibility</span></span>
+<span id="cb13-5"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2-in-r.html#cb13-5" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2-in-r.html#cb13-6" tabindex="-1"></a><span class="co"># 🔄 Load data</span></span>
+<span id="cb13-7"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2-in-r.html#cb13-7" tabindex="-1"></a>count_df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/demo_counts.csv&quot;</span>)</span>
+<span id="cb13-8"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2-in-r.html#cb13-8" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/demo_metadata.csv&quot;</span>)</span>
+<span id="cb13-9"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2-in-r.html#cb13-9" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2-in-r.html#cb13-10" tabindex="-1"></a><span class="co"># 🧬 Prepare DESeq2 inputs</span></span>
+<span id="cb13-11"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2-in-r.html#cb13-11" tabindex="-1"></a>counts <span class="ot">&lt;-</span> count_df <span class="sc">|&gt;</span></span>
+<span id="cb13-12"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2-in-r.html#cb13-12" tabindex="-1"></a>  <span class="fu">column_to_rownames</span>(<span class="st">&quot;gene&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb13-13"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2-in-r.html#cb13-13" tabindex="-1"></a>  <span class="fu">as.matrix</span>()</span>
+<span id="cb13-14"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2-in-r.html#cb13-14" tabindex="-1"></a></span>
+<span id="cb13-15"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2-in-r.html#cb13-15" tabindex="-1"></a>dds <span class="ot">&lt;-</span> <span class="fu">DESeqDataSetFromMatrix</span>(</span>
+<span id="cb13-16"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2-in-r.html#cb13-16" tabindex="-1"></a>  <span class="at">countData =</span> counts,</span>
+<span id="cb13-17"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2-in-r.html#cb13-17" tabindex="-1"></a>  <span class="at">colData =</span> metadata,</span>
+<span id="cb13-18"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2-in-r.html#cb13-18" tabindex="-1"></a>  <span class="at">design =</span> <span class="sc">~</span> condition</span>
+<span id="cb13-19"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2-in-r.html#cb13-19" tabindex="-1"></a>)</span>
+<span id="cb13-20"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2-in-r.html#cb13-20" tabindex="-1"></a></span>
+<span id="cb13-21"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2-in-r.html#cb13-21" tabindex="-1"></a><span class="co"># ⚙️ Run differential expression analysis</span></span>
+<span id="cb13-22"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2-in-r.html#cb13-22" tabindex="-1"></a>dds <span class="ot">&lt;-</span> <span class="fu">DESeq</span>(dds)</span>
+<span id="cb13-23"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2-in-r.html#cb13-23" tabindex="-1"></a></span>
+<span id="cb13-24"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2-in-r.html#cb13-24" tabindex="-1"></a><span class="co"># 📋 Extract results and clean</span></span>
+<span id="cb13-25"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2-in-r.html#cb13-25" tabindex="-1"></a>res_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">results</span>(dds)) <span class="sc">|&gt;</span></span>
+<span id="cb13-26"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2-in-r.html#cb13-26" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>(<span class="st">&quot;gene&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb13-27"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2-in-r.html#cb13-27" tabindex="-1"></a>  <span class="fu">drop_na</span>(log2FoldChange, padj) <span class="sc">|&gt;</span></span>
+<span id="cb13-28"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2-in-r.html#cb13-28" tabindex="-1"></a>  <span class="fu">arrange</span>(padj)</span>
+<span id="cb13-29"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2-in-r.html#cb13-29" tabindex="-1"></a></span>
+<span id="cb13-30"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2-in-r.html#cb13-30" tabindex="-1"></a><span class="co"># 💾 Save for downstream steps</span></span>
+<span id="cb13-31"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2-in-r.html#cb13-31" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">dir.exists</span>(<span class="st">&quot;data&quot;</span>)) <span class="fu">dir.create</span>(<span class="st">&quot;data&quot;</span>, <span class="at">recursive =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb13-32"><a href="how-do-you-perform-differential-gene-expression-analysis-using-deseq2-in-r.html#cb13-32" tabindex="-1"></a><span class="fu">write_csv</span>(res_df, <span class="st">&quot;data/deseq2_results.csv&quot;</span>)</span></code></pre></div>
+<blockquote>
+<p>✅ <strong>Takeaway:</strong> DESeq2 provides a robust statistical framework to identify significantly regulated genes. Once saved, these results can be used for downstream visualizations like volcano plots and MA plots.</p>
+</blockquote>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="what-kind-of-data-will-you-be-using-in-this-guide.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="how-do-you-validate-rna-seq-input-data-before-analysis-using-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="how-do-you-create-a-volcano-plot-from-deseq2-results-using-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -263,7 +309,7 @@ gitbook.start({
     "size": 2
   },
   "edit": {
-    "link": "https://github.com/datainsights/cdi-rnaseq/edit/main/index.Rmd",
+    "link": "https://github.com/datainsights/cdi-rnaseq/edit/main/03-1-rnaseq.Rmd",
     "text": "Edit"
   },
   "history": {

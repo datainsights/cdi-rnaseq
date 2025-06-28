@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>🌱 Welcome to the RNA-Seq Q&amp;A Guide | rnaseq.knit</title>
+  <title>Q&A 2 How do you generate synthetic RNA-Seq counts and metadata using R? | rnaseq.knit</title>
   <meta name="description" content="🧬 RNA-Seq Data Science in R" />
   <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="🌱 Welcome to the RNA-Seq Q&amp;A Guide | rnaseq.knit" />
+  <meta property="og:title" content="Q&A 2 How do you generate synthetic RNA-Seq counts and metadata using R? | rnaseq.knit" />
   <meta property="og:type" content="book" />
   
   
   <meta name="github-repo" content="https://github.com/datainsights/cdi-rnaseq/" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="🌱 Welcome to the RNA-Seq Q&amp;A Guide | rnaseq.knit" />
+  <meta name="twitter:title" content="Q&A 2 How do you generate synthetic RNA-Seq counts and metadata using R? | rnaseq.knit" />
   
   
   
@@ -28,8 +28,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-<link rel="prev" href="index.html"/>
-<link rel="next" href="what-kind-of-data-will-you-be-using-in-this-guide.html"/>
+<link rel="prev" href="how-do-you-create-a-project-data-folder-for-storing-rna-seq-inputs-and-outputs.html"/>
+<link rel="next" href="how-do-you-validate-rna-seq-input-data-before-analysis-using-r.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -218,21 +218,97 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="welcome-to-the-rna-seq-qa-guide" class="section level1 unnumbered hasAnchor">
-<h1>🌱 Welcome to the RNA-Seq Q&amp;A Guide<a href="welcome-to-the-rna-seq-qa-guide.html#welcome-to-the-rna-seq-qa-guide" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This guide is your hands-on companion for learning and applying RNA sequencing (RNA-Seq) data analysis — one question at a time.</p>
-<p>You’ll explore each step of the RNA-Seq pipeline using real tools, reproducible workflows, and well-commented code. From quality control and quantification to differential expression and biological interpretation, this guide shows how scripting, statistics, and bioinformatics come together in practice.</p>
-<p>Whether you’re a student, researcher, or self-taught enthusiast, you’ll gain confidence using Python, R, shell scripting, and reproducible workflows — including tools like <strong>DESeq2</strong>, <strong>Salmon</strong>, <strong>edgeR</strong>, <strong>FastQC</strong>, <strong>Snakemake</strong>, and more.</p>
-<p>Each Q&amp;A includes a clear explanation, relevant code in both Python and R when applicable, and builds toward real-world problem solving. You’re not just learning RNA-Seq — you’re learning to think like a modern data-driven bioinformatician.</p>
-<hr />
+<div id="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Q&A 2</span> How do you generate synthetic RNA-Seq counts and metadata using R?<a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="explanation-1" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Explanation<a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#explanation-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this step, we generate <strong>synthetic RNA-Seq data</strong> with known differences between conditions. This allows you to simulate differential expression, save the data into a <code>data/</code> folder, and later analyze it using DESeq2.</p>
+<p>We simulate:</p>
+<ul>
+<li>1000 genes</li>
+<li>14 samples (11 Positive, 3 Negative)</li>
+<li>Upregulation in the top 30 genes for Negative samples<br />
+</li>
+<li>Downregulation in the next 30 genes for Negative samples</li>
+</ul>
+<blockquote>
+<p>🔧 This setup mimics a real-world study design and ensures that the resulting <strong>volcano and MA plots</strong> clearly show the V-shape pattern of differential expression.</p>
+</blockquote>
+</div>
+<div id="r-code-1" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> R Code<a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#r-code-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-2"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-2" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-3" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb2-4"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-4" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-5" tabindex="-1"></a><span class="co"># 📦 Create output directory</span></span>
+<span id="cb2-6"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-6" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">dir.exists</span>(<span class="st">&quot;data&quot;</span>)) <span class="fu">dir.create</span>(<span class="st">&quot;data&quot;</span>, <span class="at">recursive =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-7"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-7" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-8" tabindex="-1"></a><span class="co"># 🧬 Simulation settings</span></span>
+<span id="cb2-9"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-9" tabindex="-1"></a>n_genes <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb2-10"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-10" tabindex="-1"></a>n_pos <span class="ot">&lt;-</span> <span class="dv">11</span></span>
+<span id="cb2-11"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-11" tabindex="-1"></a>n_neg <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb2-12"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-12" tabindex="-1"></a>n_de_up <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb2-13"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-13" tabindex="-1"></a>n_de_down <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb2-14"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-14" tabindex="-1"></a>gene_ids <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;Gene&quot;</span>, <span class="fu">seq_len</span>(n_genes))</span>
+<span id="cb2-15"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-15" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-16" tabindex="-1"></a><span class="co"># Simulate Positive group (baseline expression)</span></span>
+<span id="cb2-17"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-17" tabindex="-1"></a>counts_pos <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnbinom</span>(n_genes <span class="sc">*</span> n_pos, <span class="at">mu =</span> <span class="dv">100</span>, <span class="at">size =</span> <span class="dv">1</span>), <span class="at">nrow =</span> n_genes)</span>
+<span id="cb2-18"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-18" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-19" tabindex="-1"></a><span class="co"># Simulate Negative group</span></span>
+<span id="cb2-20"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-20" tabindex="-1"></a>counts_neg <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnbinom</span>(n_genes <span class="sc">*</span> n_neg, <span class="at">mu =</span> <span class="dv">100</span>, <span class="at">size =</span> <span class="dv">1</span>), <span class="at">nrow =</span> n_genes)</span>
+<span id="cb2-21"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-21" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-22" tabindex="-1"></a><span class="co"># ⬆️ Upregulate top 30 genes in Negative samples</span></span>
+<span id="cb2-23"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-23" tabindex="-1"></a>counts_neg[<span class="dv">1</span><span class="sc">:</span>n_de_up, ] <span class="ot">&lt;-</span> counts_neg[<span class="dv">1</span><span class="sc">:</span>n_de_up, ] <span class="sc">+</span> <span class="fu">rnbinom</span>(n_de_up <span class="sc">*</span> n_neg, <span class="at">mu =</span> <span class="dv">400</span>, <span class="at">size =</span> <span class="dv">1</span>)</span>
+<span id="cb2-24"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-24" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-25" tabindex="-1"></a><span class="co"># ⬇️ Downregulate next 30 genes in Negative samples</span></span>
+<span id="cb2-26"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-26" tabindex="-1"></a>counts_neg[(n_de_up <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span>(n_de_up <span class="sc">+</span> n_de_down), ] <span class="ot">&lt;-</span> <span class="fu">rnbinom</span>(n_de_down <span class="sc">*</span> n_neg, <span class="at">mu =</span> <span class="dv">10</span>, <span class="at">size =</span> <span class="dv">1</span>)</span>
+<span id="cb2-27"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-27" tabindex="-1"></a></span>
+<span id="cb2-28"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-28" tabindex="-1"></a><span class="co"># Combine counts</span></span>
+<span id="cb2-29"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-29" tabindex="-1"></a>count_matrix <span class="ot">&lt;-</span> <span class="fu">cbind</span>(counts_pos, counts_neg)</span>
+<span id="cb2-30"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-30" tabindex="-1"></a><span class="fu">colnames</span>(count_matrix) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;Sample&quot;</span>, <span class="fu">seq_len</span>(n_pos <span class="sc">+</span> n_neg))</span>
+<span id="cb2-31"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-31" tabindex="-1"></a><span class="fu">rownames</span>(count_matrix) <span class="ot">&lt;-</span> gene_ids</span>
+<span id="cb2-32"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-32" tabindex="-1"></a></span>
+<span id="cb2-33"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-33" tabindex="-1"></a><span class="co"># 📄 Metadata</span></span>
+<span id="cb2-34"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-34" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb2-35"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-35" tabindex="-1"></a>  <span class="at">Sample =</span> <span class="fu">colnames</span>(count_matrix),</span>
+<span id="cb2-36"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-36" tabindex="-1"></a>  <span class="at">condition =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;Positive&quot;</span>, n_pos), <span class="fu">rep</span>(<span class="st">&quot;Negative&quot;</span>, n_neg))</span>
+<span id="cb2-37"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-37" tabindex="-1"></a>)</span>
+<span id="cb2-38"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-38" tabindex="-1"></a></span>
+<span id="cb2-39"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-39" tabindex="-1"></a><span class="co"># 💾 Save to data/</span></span>
+<span id="cb2-40"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-40" tabindex="-1"></a><span class="fu">write_csv</span>(<span class="fu">as.data.frame</span>(count_matrix) <span class="sc">|&gt;</span> <span class="fu">rownames_to_column</span>(<span class="st">&quot;gene&quot;</span>), <span class="st">&quot;data/demo_counts.csv&quot;</span>)</span>
+<span id="cb2-41"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-41" tabindex="-1"></a><span class="fu">write_csv</span>(metadata, <span class="st">&quot;data/demo_metadata.csv&quot;</span>)</span>
+<span id="cb2-42"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-42" tabindex="-1"></a></span>
+<span id="cb2-43"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-43" tabindex="-1"></a><span class="co"># 👁️ Preview first 5 genes × 5 samples</span></span>
+<span id="cb2-44"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb2-44" tabindex="-1"></a><span class="fu">as.data.frame</span>(count_matrix)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div>
+<pre><code>      Sample1 Sample2 Sample3 Sample4 Sample5
+Gene1     186     175     175      54      54
+Gene2      45     101      54      48     287
+Gene3      38      12     214      92      86
+Gene4     293       0     172      35      85
+Gene5     215     377      72      18       3</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb4-1" tabindex="-1"></a><span class="co"># 👁️ Preview metadata</span></span>
+<span id="cb4-2"><a href="how-do-you-generate-synthetic-rna-seq-counts-and-metadata-using-r.html#cb4-2" tabindex="-1"></a><span class="fu">head</span>(metadata, <span class="dv">5</span>)</span></code></pre></div>
+<pre><code># A tibble: 5 × 2
+  Sample  condition
+  &lt;chr&gt;   &lt;chr&gt;    
+1 Sample1 Positive 
+2 Sample2 Positive 
+3 Sample3 Positive 
+4 Sample4 Positive 
+5 Sample5 Positive </code></pre>
+<blockquote>
+<p>✅ Takeaway: This simulation creates a realistic expression pattern where some genes are clearly upregulated or downregulated in one condition. This structure is ideal for learning DE analysis, producing excellent MA and volcano plots, and testing downstream workflows.</p>
+</blockquote>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="what-kind-of-data-will-you-be-using-in-this-guide.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="how-do-you-create-a-project-data-folder-for-storing-rna-seq-inputs-and-outputs.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="how-do-you-validate-rna-seq-input-data-before-analysis-using-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -263,7 +339,7 @@ gitbook.start({
     "size": 2
   },
   "edit": {
-    "link": "https://github.com/datainsights/cdi-rnaseq/edit/main/index.Rmd",
+    "link": "https://github.com/datainsights/cdi-rnaseq/edit/main/03-1-rnaseq.Rmd",
     "text": "Edit"
   },
   "history": {
