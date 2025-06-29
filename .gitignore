@@ -19,6 +19,7 @@ renv/python/
 # Bookdown and documentation output
 !docs/                 # GitBook HTML (exclude only if building elsewhere)
 !pdf/                  # Keep if selling/distributing PDF privately
+rnaseq-pdf/
 viz-pdf/
 stats-pdf/
 ml-pdf/
@@ -55,3 +56,4 @@ _bookdown.yml
 *_files/figure-html/
 *_files/figure-latex/
 .github/template-assets/project_tree.txt
+

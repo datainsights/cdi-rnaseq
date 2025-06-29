@@ -51,6 +51,28 @@ Each Q&A includes a clear explanation, relevant code in both Python and R when a
 
 ---
 
+## 🌐 The CDI Learning Path {-}
+
+This guide is part of the **Complex Data Insights (CDI)** learning system — a fully free and open-source project licensed under the MIT License.
+
+CDI breaks down complex topics into four progressive layers, designed to be explored individually or as an integrated journey:
+
+- 🔍 **EDA (Exploratory Data Analysis)**  
+  Understand your data — explore its structure, patterns, and quirks.
+
+- 📊 **VIZ (Visualization)**  
+  Communicate findings through clear and compelling visuals.
+
+- 📐 **STATS (Statistical Analysis)**  
+  Test hypotheses and quantify uncertainty using sound statistical methods.
+
+- 🤖 **ML (Machine Learning)**  
+  Build models to predict, classify, and uncover deeper insights.
+
+**CDI helps you grow — one Q&A at a time.**
+
+---
+
 # 📂 What kind of data will you be using in this guide? {-}
 
 This guide uses **realistic synthetic RNA-Seq data** that mimics biological experiments with two conditions (e.g., *Positive* vs. *Negative*). The dataset includes:
