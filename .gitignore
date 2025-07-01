@@ -27,6 +27,7 @@ viz-gitbook/
 stats-gitbook/
 ml-gitbook/
 REFER/
+*.pdf
 
 # Images and data
 data/
@@ -57,3 +58,5 @@ _bookdown.yml
 *_files/figure-latex/
 .github/template-assets/project_tree.txt
 
+rnaseq-pdf/rnaseq.pdf
+rnaseq-pdf/rnaseq.pdf
