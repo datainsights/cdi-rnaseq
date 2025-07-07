@@ -3,6 +3,8 @@
 # Exit immediately if any command fails
 set -e
 
+total_start=$(date +%s)  # ⬅️ Start total timer
+
 # Print the current R version (useful for logging and debugging)
 echo "📦 R version:"
 Rscript -e 'R.version.string'
@@ -155,3 +157,10 @@ echo "✅ Cleanup complete."
 # Remove symlink to avoid accidental reuse
 rm -f index.Rmd
 rm -f _bookdown.yml
+
+
+print_duration $start_time $end_time  # last per-part timing
+
+total_end=$(date +%s)
+total_elapsed=$((total_end - total_start))
+echo -e "\n⏱️  Total build time: ${total_elapsed} seconds"

@@ -70,3 +70,10 @@ echo "✅ Cleanup complete."
 # Remove symlink to avoid accidental reuse
 rm -f index.Rmd
 rm -f _bookdown.yml
+
+
+print_duration $start_time $end_time  # last per-part timing
+
+total_end=$(date +%s)
+total_elapsed=$((total_end - total_start))
+echo -e "\n⏱️  Total build time: ${total_elapsed} seconds"
