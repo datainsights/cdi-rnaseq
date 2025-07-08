@@ -9,7 +9,6 @@ Modular, reproducible framework for analyzing RNA-Seq datasets using
 
 ---
 
-![Test Book Build](https://github.com/datainsights/cdi-rnaseq/actions/workflows/test-book.yml/badge.svg)
 ![Deploy Book](https://github.com/datainsights/cdi-rnaseq/actions/workflows/deploy-book.yml/badge.svg)
 
 > Manual test + auto-deploy CI split for clean and controlled builds.
