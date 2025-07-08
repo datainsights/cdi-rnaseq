@@ -1,8 +1,8 @@
 # 🧬 CDI: RNA-Seq Data Analysis
 
-[![Live Site](https://img.shields.io/badge/visit-site-blue?logo=githubpages)](https://datainsights.github.io/cdi-rnaseq)
+[![Live Site](https://img.shields.io/badge/visit-site-blue?logo=githubpages)](https://rnaseq.complexdatainsights.com)
 
-📘 **Live guide:** [https://datainsights.github.io/cdi-rnaseq](https://datainsights.github.io/cdi-rnaseq)
+📘 **Live guide:** [https://rnaseq.complexdatainsights.com](https://rnaseq.complexdatainsights.com)
 
 Modular, reproducible framework for analyzing RNA-Seq datasets using  
 **Bookdown**, **renv**, and **GitHub Actions** — deployed via GitHub Pages.
